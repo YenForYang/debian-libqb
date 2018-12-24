@@ -1,0 +1,25 @@
+From: =?utf-8?q?Ferenc_W=C3=A1gner?= <wferi@debian.org>
+Date: Thu, 12 Oct 2017 15:13:25 +0200
+Subject: hurd: /dev/shm is a tmpfs here as well
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Ferenc Wágner <wferi@debian.org>
+---
+ lib/unix.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/unix.c b/lib/unix.c
+index 3c8f327..c31145e 100644
+--- a/lib/unix.c
++++ b/lib/unix.c
+@@ -80,7 +80,7 @@ qb_sys_mmap_file_open(char *path, const char *file, size_t bytes,
+ 	if (is_absolute) {
+ 		(void)strlcpy(path, file, PATH_MAX);
+ 	} else {
+-#if defined(QB_LINUX) || defined(QB_CYGWIN)
++#if defined(QB_LINUX) || defined(QB_CYGWIN) || defined(QB_GNU)
+ 		snprintf(path, PATH_MAX, "/dev/shm/%s", file);
+ #else
+ 		snprintf(path, PATH_MAX, "%s/%s", SOCKETDIR, file);

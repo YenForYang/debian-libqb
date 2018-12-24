@@ -1,0 +1,241 @@
+.TH "qb_log_overview" 3 "Sun Dec 2 2018" "Version 1.0.3" "libqb" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+qb_log_overviewLogging 
+ \- The logging API provides four main parts (basics, filtering, threading & blackbox)\&.
+.PP
+The idea behind this logging system is not to be prescriptive but to provide a set of tools to help the developer achieve what they want quickly and easily\&.
+.PP
+\fBBasic logging API\&.\fP
+.RS 4
+Call \fBqb_log()\fP to generate a log message\&. Then to write the message somewhere meaningful call \fBqb_log_ctl()\fP to configure the targets\&.
+.RE
+.PP
+Simplest possible use: 
+.PP
+.nf
+main() {
+     qb_log_init("simple-log", LOG_DAEMON, LOG_INFO);
+        // \&.\&.\&.
+     qb_log(LOG_WARNING, "watch out");
+        // \&.\&.\&.
+     qb_log_fini();
+}
+
+.fi
+.PP
+.PP
+\fBNote:\fP
+.RS 4
+In practice, such a minimalistic approach hardly caters real use cases\&. Following section discusses the customization\&. Moreover when employing the log module is bound to its active use (some log messages are assuredly emitted within the target compilation unit), it's quite vital to instrument the target side with \fC\fBQB_LOG_INIT_DATA()\fP\fP macro placed in the top file scope in exactly one source file (preferably the main one) to be mixed into the resulting compilation unit\&. This is a self-defensive measure for when the linker-assisted collection of callsite data silently fails, which could otherwise go unnoticed, causing troubles down the road, but alas it cannot discern misuse of \fC\fBQB_LOG_INIT_DATA()\fP\fP macro in no-logging context from broken callsite section handling assumptions owing to overboard fancy linker -- situation that the self-check aims to detect in the first place\&.
+.RE
+.PP
+\fBConfiguring log targets\&.\fP
+.RS 4
+A log target can be syslog, stderr, the blackbox, stdout, or a text file\&. By default, only syslog is enabled\&. While this is customary for daemons, it is rarely appropriate for ordinary programs, which should promptly disable that when other targets (read on) are to be utilized: 
+.PP
+.nf
+qb_log_ctl(B_LOG_SYSLOG, QB_LOG_CONF_ENABLED, QB_FALSE);
+
+.fi
+.PP
+.RE
+.PP
+To enable a target do the following: 
+.PP
+.nf
+qb_log_ctl(QB_LOG_BLACKBOX, QB_LOG_CONF_ENABLED, QB_TRUE);
+
+.fi
+.PP
+.PP
+syslog, stderr, the blackbox, and stdout are static (they don't need to be created, just enabled or disabled)\&. However, you can open multiple logfiles (falling within inclusive range \fCQB_LOG_TARGET_DYNAMIC_START\fP up to \fCQB_LOG_TARGET_DYNAMIC_END\fP)\&. To do this, use the following code: 
+.PP
+.nf
+mytarget = qb_log_file_open("/var/log/mylogfile");
+qb_log_ctl(mytarget, QB_LOG_CONF_ENABLED, QB_TRUE);
+
+.fi
+.PP
+.PP
+Once your targets are enabled/opened, you can configure them as follows: Configure the size of blackbox: 
+.PP
+.nf
+qb_log_ctl(QB_LOG_BLACKBOX, QB_LOG_CONF_SIZE, 1024*10);
+
+.fi
+.PP
+.PP
+Make logging to file threaded: 
+.PP
+.nf
+qb_log_ctl(mytarget, QB_LOG_CONF_THREADED, QB_TRUE);
+
+.fi
+.PP
+.PP
+Sometimes, syslog daemons are (pre)configured to filter messages not exceeding a particular priority\&. When this happens to be the logging target, the designated priority of the message is passed along unchanged, possibly resulting in message loss\&. For messages up to \fCLOG_DEBUG\fP importance, this can be worked around by proportionally bumping the priorities to be passed to syslog (here, the step is such that \fCLOG_DEBUG\fP gets promoted to \fCLOG_INFO\fP): 
+.PP
+.nf
+qb_log_ctl(QB_LOG_SYSLOG, QB_LOG_CONF_PRIORITY_BUMP,
+           LOG_INFO - LOG_DEBUG);
+
+.fi
+.PP
+.PP
+To ensure all logs to file targets are fsync'ed (new messages expressly transferred to the storage device as they keep coming, otherwise defaults to \fCQB_FALSE\fP): 
+.PP
+.nf
+qb_log_ctl(mytarget, QB_LOG_CONF_FILE_SYNC, QB_TRUE);
+
+.fi
+.PP
+.PP
+\fBFiltering messages\&.\fP
+.RS 4
+To have more power over what log messages go to which target you can apply filters to the targets\&. What happens is the desired callsites have the correct bit set\&. Then when the log message is generated it gets sent to the targets based on which bit is set in the callsite's 'target' bitmap\&. Messages can be filtered based on the:
+.IP "1." 4
+filename + priority
+.IP "2." 4
+function name + priority
+.IP "3." 4
+format string + priority
+.PP
+.RE
+.PP
+So to make all logs from evil_function() go to stderr, do the following: 
+.PP
+.nf
+qb_log_filter_ctl(QB_LOG_STDERR, QB_LOG_FILTER_ADD,
+             QB_LOG_FILTER_FUNCTION, "evil_function", LOG_TRACE);
+
+.fi
+.PP
+.PP
+So to make all logs from totem* (with a priority <= LOG_INFO) go to stderr, do the following: 
+.PP
+.nf
+qb_log_filter_ctl(QB_LOG_STDERR, QB_LOG_FILTER_ADD,
+             QB_LOG_FILTER_FILE, "totem", LOG_INFO);
+
+.fi
+.PP
+.PP
+So to make all logs with the substring 'ringbuffer' go to stderr, do the following: 
+.PP
+.nf
+qb_log_filter_ctl(QB_LOG_STDERR, QB_LOG_FILTER_ADD,
+             QB_LOG_FILTER_FORMAT, "ringbuffer", LOG_TRACE);
+
+.fi
+.PP
+.PP
+\fBThread safe non-blocking logging\&.\fP
+.RS 4
+Logging is only thread safe when threaded logging is in use\&. If you plan on logging from multiple threads, you must initialize libqb's logger thread and use qb_log_filter_ctl to set the QB_LOG_CONF_THREADED flag on all the logging targets in use\&.
+.RE
+.PP
+To achieve non-blocking logging, so that any calls to write() or syslog() will not hold up your program, you can use threaded logging as well\&.
+.PP
+Threaded logging use: 
+.PP
+.nf
+main() {
+     qb_log_init("simple-log", LOG_DAEMON, LOG_INFO);
+     qb_log_ctl(QB_LOG_SYSLOG, QB_LOG_CONF_THREADED, QB_TRUE);
+        // \&.\&.\&.
+        daemonize();
+        // call this after you fork()
+        qb_log_thread_start();
+        // \&.\&.\&.
+     qb_log(LOG_WARNING, "watch out");
+        // \&.\&.\&.
+     qb_log_fini();
+}
+
+.fi
+.PP
+.PP
+\fBA blackbox for in-field diagnosis\&.\fP
+.RS 4
+This stores log messages in a ringbuffer so they can be written to file if the program crashes (you will need to catch SIGSEGV)\&. These can then be easily printed out later\&.
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+the blackbox is not enabled by default\&.
+.RE
+.PP
+Blackbox usage: 
+.PP
+.nf
+static void sigsegv_handler(int sig)
+{
+        (void)signal (SIGSEGV, SIG_DFL);
+        qb_log_blackbox_write_to_file("simple-log\&.fdata");
+        qb_log_fini();
+        raise(SIGSEGV);
+}
+
+main() {
+
+     signal(SIGSEGV, sigsegv_handler);
+
+     qb_log_init("simple-log", LOG_DAEMON, LOG_INFO);
+     qb_log_filter_ctl(QB_LOG_BLACKBOX, QB_LOG_FILTER_ADD,
+                  QB_LOG_FILTER_FILE, "*", LOG_DEBUG);
+     qb_log_ctl(QB_LOG_BLACKBOX, QB_LOG_CONF_SIZE, 1024*10);
+     qb_log_ctl(QB_LOG_BLACKBOX, QB_LOG_CONF_ENABLED, QB_TRUE);
+        // \&.\&.\&.
+     qb_log(LOG_WARNING, "watch out");
+        // \&.\&.\&.
+     qb_log_fini();
+}
+
+.fi
+.PP
+.PP
+\fBTagging messages\&.\fP
+.RS 4
+You can tag messages using the second argument to \fBqb_logt()\fP or by using \fBqb_log_filter_ctl()\fP\&. This can be used to add feature or sub-system information to the logs\&.
+.RE
+.PP
+.PP
+.nf
+const char* my_tags_stringify(uint32_t tags) {
+        if (qb_bit_is_set(tags, QB_LOG_TAG_LIBQB_MSG_BIT) {
+                return "libqb";
+        } else if (tags == 3) {
+                return "three";
+        } else {
+                return "MAIN";
+        }
+}
+main() {
+        // \&.\&.\&.
+        qb_log_tags_stringify_fn_set(my_tags_stringify);
+        qb_log_format_set(QB_LOG_STDERR, "[%5g] %p %b");
+        // \&.\&.\&.
+        qb_logt(LOG_INFO, 3, "hello");
+        qb_logt(LOG_INFO, 0, "hello");
+}
+.fi
+.PP
+ The code above will produce: 
+.PP
+.nf
+[libqb] some message
+[three] info hello
+[MAIN ] info hello
+
+.fi
+.PP
+ 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBqblog\&.h\fP 
+.RE
+.PP
+

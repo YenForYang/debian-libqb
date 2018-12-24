@@ -1,0 +1,112 @@
+.TH "qb_util_overview" 3 "Sun Dec 2 2018" "Version 1.0.3" "libqb" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+qb_util_overviewCommon Utilities 
+ \- These are some convience functions used throughout libqb\&.
+.PP
+\fBAuthor:\fP
+.RS 4
+Angus Salkeld asalkeld@redhat.com
+.RE
+.PP
+\fBLocking\fP
+.RS 4
+
+.IP "\(bu" 2
+\fBqb_thread_lock_create()\fP
+.IP "\(bu" 2
+\fBqb_thread_lock()\fP
+.IP "\(bu" 2
+\fBqb_thread_trylock()\fP
+.IP "\(bu" 2
+\fBqb_thread_unlock()\fP
+.IP "\(bu" 2
+\fBqb_thread_lock_destroy()\fP
+.PP
+.RE
+.PP
+\fBTime functions\fP
+.RS 4
+
+.IP "\(bu" 2
+\fBqb_timespec_add_ms()\fP
+.IP "\(bu" 2
+\fBqb_util_nano_current_get()\fP
+.IP "\(bu" 2
+\fBqb_util_nano_monotonic_hz()\fP
+.IP "\(bu" 2
+\fBqb_util_nano_from_epoch_get()\fP
+.IP "\(bu" 2
+\fBqb_util_timespec_from_epoch_get()\fP
+.PP
+.RE
+.PP
+\fBBasic Stopwatch\fP
+.RS 4
+
+.PP
+.nf
+uint64_t elapsed1;
+uint64_t elapsed2;
+qb_util_stopwatch_t *sw = qb_util_stopwatch_create();
+
+qb_util_stopwatch_start(sw);
+
+usleep(sometime);
+qb_util_stopwatch_stop(sw);
+elapsed1 = qb_util_stopwatch_us_elapsed_get(sw);
+
+usleep(somemoretime);
+qb_util_stopwatch_stop(sw);
+elapsed2 = qb_util_stopwatch_us_elapsed_get(sw);
+
+qb_util_stopwatch_free(sw);
+
+.fi
+.PP
+.RE
+.PP
+\fBStopwatch with splits\fP
+.RS 4
+Setup a stopwatch with space for 3 splits\&.
+.RE
+.PP
+.PP
+.nf
+uint64_t split;
+qb_util_stopwatch_t *sw = qb_util_stopwatch_create();
+
+qb_util_stopwatch_split_ctl(sw, 3, 0);
+qb_util_stopwatch_start(sw);
+
+usleep(sometime);
+qb_util_stopwatch_split(sw);
+
+usleep(somemoretime);
+qb_util_stopwatch_split(sw);
+
+usleep(somemoretime);
+qb_util_stopwatch_split(sw);
+
+idx = qb_util_stopwatch_split_last(sw);
+do {
+     split = qb_util_stopwatch_time_split_get(sw, idx, idx);
+     qb_log(LOG_INFO, "split %d is %"PRIu64"", last, split);
+     idx--;
+} while (split > 0);
+
+split = qb_util_stopwatch_time_split_get(sw, 2, 1);
+qb_log(LOG_INFO, "time between second and third split is %"PRIu64"", split);
+
+qb_util_stopwatch_free(sw);
+.fi
+.PP
+ 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBqbutil\&.h\fP 
+.RE
+.PP
+

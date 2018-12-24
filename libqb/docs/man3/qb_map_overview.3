@@ -1,0 +1,88 @@
+.TH "qb_map_overview" 3 "Sun Dec 2 2018" "Version 1.0.3" "libqb" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+qb_map_overviewMap 
+ \- This provides a map interface to a Patricia trie, hashtable or skiplist\&.
+.PP
+\fBOrdering\fP
+.RS 4
+The hashtable is NOT ordered, but ptrie and skiplist are\&.
+.RE
+.PP
+\fBIterating\fP
+.RS 4
+Below is a simple example of how to iterate over a map\&. 
+.PP
+.nf
+const char *p;
+void *data;
+qb_map_iter_t *it = qb_map_iter_create(m);
+for (p = qb_map_iter_next(it, &data); p; p = qb_map_iter_next(it, &data)) {
+    printf("%s > %s\n", p, (char*) data);
+}
+qb_map_iter_free(it);
+
+.fi
+.PP
+.RE
+.PP
+Deletion of items within the iterator is supported\&. But note do not free the item memory in the iterator\&. If you need to free the data items then register for a notifier and free the memory there\&. This is required as the items are reference counted\&. 
+.PP
+.nf
+qb_map_notify_add(m, NULL, my_map_free_handler,
+             QB_MAP_NOTIFY_FREE, NULL);
+
+.fi
+.PP
+.PP
+\fBNotifications\fP
+.RS 4
+These allow you to get callbacks when values are inserted/removed or replaced\&. 
+.RE
+.PP
+\fBNote:\fP
+.RS 4
+hashtable only supports deletion and replacement notificatins\&. There is also a special global callback for freeing deleted and replaced values (QB_MAP_NOTIFY_FREE)\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBqb_map_notify_add()\fP \fBqb_map_notify_del_2()\fP
+.RE
+.PP
+\fBPrefix matching\fP
+.RS 4
+The ptrie supports prefixes in the iterator:
+.RE
+.PP
+.PP
+.nf
+it = qb_map_pref_iter_create(m, "aa");
+while ((p = qb_map_iter_next(it, &data)) != NULL) {
+    printf("%s > %s\n", p, (char*)data);
+}
+qb_map_iter_free(it);
+.fi
+.PP
+.PP
+The ptrie also supports prefixes in notifications: (remember to pass QB_MAP_NOTIFY_RECURSIVE into the notify_add\&. 
+.PP
+.nf
+qb_map_notify_add(m, "root", my_map_notification,
+            (QB_MAP_NOTIFY_INSERTED|
+             QB_MAP_NOTIFY_DELETED|
+             QB_MAP_NOTIFY_REPLACED|
+             QB_MAP_NOTIFY_RECURSIVE),
+            NULL);
+
+.fi
+.PP
+ 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBqbmap\&.h\fP 
+.RE
+.PP
+

@@ -1,0 +1,27 @@
+.TH "qb_array_overview" 3 "Sun Dec 2 2018" "Version 1.0.3" "libqb" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+qb_array_overviewArray 
+ \- This is a dynamic array (it can grow, but without moving memory)\&.
+.PP
+.PP
+.nf
+arr = qb_array_create_2(64, sizeof(struct my_struct), 256);
+\&.\&.\&.
+res = qb_array_index(arr, idx, (void**)&my_ptr);
+if (res < 0) {
+     return res;
+}
+// use my_ptr, now even if there is a grow, this pointer will be valid\&.
+.fi
+.PP
+.PP
+Currently, this dynamic array abstract data type can accommodate only 2^(\fC*\fP QB_ARRAY_MAX_INDEX_BITS) elements, and with standard zero-based indexing, this gives a valid index range [0, \fCQB_ARRAY_MAX_ELEMENTS\fP), where the notation denotes the beginning of the interval is included and the end is excluded\&. In other words, client space shall avoid a pitfall of relying solely on the type of  parameter to \fBqb_array_create\fP and/or of  parameter to \fBqb_array_index\fP (these types conflict, anyway)\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBqbarray\&.h\fP 
+.RE
+.PP
+

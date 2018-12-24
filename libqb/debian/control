@@ -1,0 +1,55 @@
+Source: libqb
+Priority: optional
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Uploaders:
+           Ferenc Wágner <wferi@debian.org>,
+           Adrian Vondendriesch <adrian.vondendriesch@credativ.de>
+Build-Depends:
+               check,
+               debhelper (>= 11~),
+               doxygen,
+               libglib2.0-dev,
+               pkg-config
+Build-Depends-Indep:
+ graphviz,
+Standards-Version: 4.2.1
+Section: libs
+Homepage: https://github.com/clusterlabs/libqb/wiki
+Vcs-Git: https://salsa.debian.org/ha-team/libqb.git
+Vcs-Browser: https://salsa.debian.org/ha-team/libqb
+X-Common-Description: libqb provides a set of high performance client-server
+ reusable features. It offers high performance logging, tracing, IPC and poll.
+ Its initial features were spun off the Corosync cluster communication suite
+ to make them accessible for other projects.
+
+Package: libqb-dev
+Section: libdevel
+Architecture: any
+# qb-blackbox does not warrant a separate package:
+Multi-Arch: no
+Depends: libqb0 (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
+Suggests: libqb-doc
+Description: high performance client server features library (devel files)
+ ${S:X-Common-Description}
+ .
+ This package contains libqb's development files. You will need it to develop
+ applications using libqb.
+
+Package: libqb-doc
+Section: doc
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}
+Description: high performance client server features library (API docs)
+ ${S:X-Common-Description}
+ .
+ This package contains the API documentation for libqb.
+
+Package: libqb0
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: high performance client server features library
+ ${S:X-Common-Description}
+ .
+ This package contains the libqb library itself.

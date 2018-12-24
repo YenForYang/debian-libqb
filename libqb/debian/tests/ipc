@@ -1,0 +1,20 @@
+#!/bin/sh -ex
+
+cd examples
+# the os_base.h in-tree header includes inttypes.h for the examples
+ln -sf /usr/include/inttypes.h os_base.h # -f to enable repeated runs
+gcc $(pkg-config --cflags libqb) \
+    -o ipcserver ipcserver.c \
+    $(pkg-config --libs libqb)
+gcc $(pkg-config --cflags libqb) \
+    -o ipcclient ipcclient.c \
+    $(pkg-config --libs libqb)
+
+./ipcserver > ipc.out 2>&1 &
+pid="$!"
+sleep 1 # give ipcserver ample chance to start up fully
+( echo this is a test; echo q ) | ./ipcclient
+kill "$pid"
+
+cat ipc.out
+fgrep 'this is a test' ipc.out

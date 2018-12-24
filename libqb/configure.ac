@@ -1,0 +1,901 @@
+
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.61])
+
+dnl inject zero as a "patch" component of the version if missing in tag
+AC_INIT([libqb],
+	m4_esyscmd([build-aux/git-version-gen .tarball-version \
+		    's|^\(v[0-9][0-9]*\.[0-9][0-9]*\)\([^.].*\)\?$|\1.0\2|']),
+	[developers@clusterlabs.org])
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_SRCDIR([lib/ringbuffer.c])
+AC_CONFIG_HEADERS([include/config.h include/qb/qbconfig.h])
+AC_USE_SYSTEM_EXTENSIONS
+
+AM_INIT_AUTOMAKE([-Wno-portability dist-xz subdir-objects])
+dnl automake >= 1.11 offers --enable-silent-rules for suppressing the output from
+dnl normal compilation.  When a failure occurs, it will then display the full
+dnl command line
+dnl Wrap in m4_ifdef to avoid breaking on older platforms
+m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
+LT_PREREQ([2.2.6])
+LT_INIT
+
+AC_CONFIG_MACRO_DIR([m4])
+
+AC_CANONICAL_HOST
+AC_PROG_LIBTOOL
+AC_LANG([C])
+
+dnl Fix default variables - "prefix" variable if not specified
+if test "$prefix" = "NONE"; then
+	prefix="/usr"
+	if test "$localstatedir" = "\${prefix}/var"; then
+		localstatedir="/var"
+	fi
+	if test "$sysconfdir" = "\${prefix}/etc"; then
+		sysconfdir="/etc"
+	fi
+	if test "$libdir" = "\${exec_prefix}/lib"; then
+		if test -e /usr/lib64; then
+			libdir="/usr/lib64"
+		else
+			libdir="/usr/lib"
+		fi
+	fi
+fi
+
+if test "$srcdir" = "."; then
+	AC_MSG_NOTICE([building in place srcdir:$srcdir])
+	AC_DEFINE([BUILDING_IN_PLACE], 1, [building in place])
+else
+	AC_MSG_NOTICE([building out of tree srcdir:$srcdir])
+fi
+
+# Checks for programs.
+
+# check stolen from gnulib/m4/gnu-make.m4
+if ! ${MAKE-make} --version /cannot/make/this >/dev/null 2>&1; then
+	AC_MSG_ERROR([you don't seem to have GNU make; it is required])
+fi
+
+AC_PROG_CXX
+AC_PROG_AWK
+AC_PROG_CC
+AC_PROG_CPP
+AM_PROG_CC_C_O
+AC_PROG_CC_C99
+if test "x$ac_cv_prog_cc_c99" = "xno"; then
+	AC_MSG_ERROR(["C99 support is required"])
+fi
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
+AC_CHECK_PROGS([PKGCONFIG], [pkg-config])
+AC_CHECK_PROGS([DOXYGEN], [doxygen])
+AM_CONDITIONAL(HAVE_DOXYGEN, test -n "${DOXYGEN}")
+AC_CHECK_PROGS([SPLINT], [splint])
+AM_CONDITIONAL(HAVE_SPLINT, test -n "${SPLINT}")
+AC_CHECK_TOOLS([NM], [eu-nm nm], [:])
+AC_CHECK_TOOLS([READELF], [eu-readelf readelf], [:])
+AM_PATH_PYTHON([2.6],, [:])
+AM_CONDITIONAL([HAVE_PYTHON], [test "$PYTHON" != :])
+
+## local helper functions
+
+# this function checks if CC support options passed as
+# args. Global CFLAGS are ignored during this test.
+cc_supports_flag() {
+	BACKUP="$CPPFLAGS"
+	CPPFLAGS="$CPPFLAGS $@ -Werror"
+	AC_MSG_CHECKING([whether $CC supports "$@"])
+	AC_PREPROC_IFELSE([AC_LANG_PROGRAM([])],
+			  [RC=0; AC_MSG_RESULT([yes])],
+			  [RC=1; AC_MSG_RESULT([no])])
+	CPPFLAGS="$BACKUP"
+	return $RC
+}
+
+## cleanup
+AC_MSG_NOTICE(Sanitizing prefix: ${prefix})
+case $prefix in
+  NONE) prefix=/usr/local;;
+esac
+
+AC_MSG_NOTICE(Sanitizing exec_prefix: ${exec_prefix})
+case $exec_prefix in
+  NONE)   exec_prefix=$prefix;;
+  prefix) exec_prefix=$prefix;;
+esac
+
+# Checks for libraries.
+AX_PTHREAD(,[AC_MSG_ERROR([POSIX threads support is required])])
+AX_SAVE_FLAGS
+AC_SEARCH_LIBS([dlopen],[dl],,[AC_MSG_ERROR([cannot find dlopen() function])])
+AC_SUBST([dlopen_LIBS],[$LIBS])
+AX_RESTORE_FLAGS
+AX_SAVE_FLAGS
+AC_SEARCH_LIBS([socket], [socket],,[AC_MSG_ERROR([cannot find socket() function])])
+AC_SUBST([socket_LIBS],[$LIBS])
+AX_RESTORE_FLAGS
+AX_SAVE_FLAGS
+AC_SEARCH_LIBS([gethostbyname], [nsl],,[AC_MSG_ERROR([cannot find gethostbyname() function])])
+AC_SUBST([nsl_LIBS],[$LIBS])
+AX_RESTORE_FLAGS
+
+# look for testing harness "check"
+PKG_CHECK_MODULES([CHECK], [check >= 0.9.4],[with_check=yes],[with_check=no])
+AM_CONDITIONAL(HAVE_CHECK, test "${with_check}" = "yes")
+
+# look for GLIB (used for testing integration)
+PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.0, have_glib=yes, have_glib=no)
+AM_CONDITIONAL(HAVE_GLIB, test x$have_glib = xyes)
+AC_SUBST(GLIB_CFLAGS)
+AC_SUBST(GLIB_LIBS)
+if test x"$have_glib" = xyes; then
+AC_DEFINE_UNQUOTED([HAVE_GLIB], [1], [We have glib])
+fi
+
+# Checks for header files.
+AC_HEADER_STDC
+AC_HEADER_SYS_WAIT
+
+AC_CHECK_HEADERS([arpa/inet.h link.h fcntl.h inttypes.h limits.h netinet/in.h \
+		  stdint.h stddef.h stdlib.h string.h strings.h \
+		  dlfcn.h time.h sys/time.h sys/types.h sys/stat.h \
+		  sys/param.h sys/socket.h sys/time.h sys/poll.h sys/epoll.h \
+		  sys/uio.h sys/event.h sys/sockio.h sys/un.h sys/resource.h \
+		  syslog.h errno.h unistd.h sys/mman.h \
+		  sys/sem.h sys/ipc.h sys/msg.h netdb.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_TYPE_UID_T
+AC_C_INLINE
+AC_TYPE_INT32_T
+AC_TYPE_INT64_T
+AC_TYPE_INT8_T
+AC_TYPE_MODE_T
+AC_TYPE_PID_T
+AC_TYPE_SIZE_T
+AC_TYPE_SSIZE_T
+AC_TYPE_UINT64_T
+AC_TYPE_UINT32_T
+AC_TYPE_UINT16_T
+AC_TYPE_UINT8_T
+
+AC_CHECK_MEMBER([struct sockaddr_un.sun_len],
+                [AC_DEFINE([HAVE_STRUCT_SOCKADDR_UN_SUN_LEN],
+                           1,
+                           [Define to 1 if struct sockaddr_un has a member sun_len])],
+                [],
+                [#include <sys/un.h>])
+
+AC_MSG_CHECKING(looking for union semun in sys/sem.h)
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+[[#include <sys/types.h>
+  #include <sys/ipc.h>
+  #include <sys/sem.h>]],
+[[union semun arg; semctl(0, 0, 0, arg);]])],
+                    [
+                      AC_MSG_RESULT([yes])
+                      AC_DEFINE_UNQUOTED([HAVE_SEMUN], 1, [Define to 1 if you have union semun.])
+                    ],
+                    [
+                      AC_MSG_RESULT([no])
+                    ]
+                 )
+
+AC_MSG_CHECKING(for a working clock_getres(CLOCK_MONOTONIC, &ts))
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+[[#include <time.h>]],
+[[struct timespec ts; if(clock_getres(CLOCK_MONOTONIC, &ts)) return -1;]])],
+                    [
+                      AC_MSG_RESULT([yes])
+                      AC_DEFINE_UNQUOTED([HAVE_CLOCK_GETRES_MONOTONIC], 1, [Define to 1 if clock_getres(CLOCK_MONOTONIC, &ts) works])
+                    ],
+                    [
+                      AC_MSG_RESULT([no])
+                    ]
+                 )
+
+
+# Checks for library functions
+AC_FUNC_CHOWN
+AC_FUNC_FORK
+AC_FUNC_MMAP
+AC_FUNC_STRERROR_R
+AC_CHECK_FUNCS([alarm clock_gettime \
+		fsync fdatasync ftruncate \
+		gettimeofday localtime localtime_r \
+		memset munmap socket \
+		strchr strrchr strdup strstr strcasecmp \
+		poll epoll_create epoll_create1 kqueue \
+		random rand getrlimit sysconf \
+		getpeerucred getpeereid \
+		openat unlinkat])
+
+AX_SAVE_FLAGS
+CFLAGS="$CFLAGS $PTHREAD_CFLAGS"
+LIBS="$LIBS $PTHREAD_LIBS"
+AC_CHECK_FUNCS([pthread_spin_lock pthread_setschedparam \
+		pthread_mutexattr_setpshared \
+		pthread_condattr_setpshared \
+		sem_timedwait semtimedop])
+AX_RESTORE_FLAGS
+
+# Checks for defined macros
+AC_MSG_CHECKING(for MSG_NOSIGNAL)
+AC_TRY_COMPILE([#include <sys/socket.h>],
+	       [ int f = MSG_NOSIGNAL; ],
+	       [ AC_MSG_RESULT(yes)
+	         AC_DEFINE(HAVE_MSG_NOSIGNAL, 1,
+	         [Define this symbol if you have MSG_NOSIGNAL])],
+	       [ AC_MSG_RESULT(no)])
+
+AC_MSG_CHECKING(for SO_NOSIGPIPE )
+AC_TRY_COMPILE([#include <sys/socket.h>],
+		[ int f = SO_NOSIGPIPE; ],
+		[ AC_MSG_RESULT(yes)
+		  AC_DEFINE(HAVE_SO_NOSIGPIPE, 1,
+		  [Define this symbol if you have SO_NOSIGPIPE]) ],
+		[ AC_MSG_RESULT(no)])
+AC_MSG_CHECKING([for RTLD_NEXT])
+AC_TRY_COMPILE([#ifndef _GNU_SOURCE
+		#define _GNU_SOURCE
+		#endif
+                #include <dlfcn.h>],
+		[ void *h = RTLD_NEXT; ],
+		[ AC_MSG_RESULT([yes])
+		  AC_DEFINE([HAVE_FAILURE_INJECTION], 1,
+			    [have failure injection])
+		  have_RTLD_NEXT=yes ],
+		[ AC_MSG_RESULT([no])])
+
+
+AM_CONDITIONAL(HAVE_SEM_TIMEDWAIT,
+	       [test "x$ac_cv_func_sem_timedwait" = xyes])
+AM_CONDITIONAL(HAVE_EPOLL,
+	       [test "x$ac_cv_func_epoll_create" = xyes])
+AM_CONDITIONAL(HAVE_POLL,
+	       [test "x$ac_cv_func_poll" = xyes])
+AM_CONDITIONAL(HAVE_KQUEUE,
+	       [test "x$ac_cv_func_kqueue" = xyes])
+AM_CONDITIONAL(HAVE_FAILURE_INJECTION,
+	       [test "x$have_RTLD_NEXT" = xyes])
+
+AC_CONFIG_LIBOBJ_DIR(lib)
+AC_REPLACE_FUNCS(strlcpy strlcat strchrnul)
+
+## local defines
+PACKAGE_FEATURES=""
+
+if test x$ac_cv_func_epoll_create = xyes; then
+	PACKAGE_FEATURES="$PACKAGE_FEATURES epoll"
+fi
+
+nongcc_memory_barrier_needed=no
+arch_force_shmlba=no
+file_sync=fdatasync
+AC_MSG_CHECKING([for architecture in ${host_cpu}])
+case $host_cpu in
+	sparc*)
+		AC_MSG_RESULT([sparc])
+		AC_DEFINE_UNQUOTED([QB_ARCH_SPARC], [1], [sparc])
+		nongcc_memory_barrier_needed=yes
+		arch_force_shmlba=yes
+		;;
+	alpha*)
+		AC_MSG_RESULT([alpha])
+		AC_DEFINE_UNQUOTED([QB_ARCH_ALPHA], [1], [alpha])
+		nongcc_memory_barrier_needed=yes
+		;;
+	powerpc*)
+		AC_MSG_RESULT([powerpc])
+		AC_DEFINE_UNQUOTED([QB_ARCH_POWERPC], [1], [powerpc])
+		ac_cv_link_attribute_section=no
+		nongcc_memory_barrier_needed=yes
+		arch_force_shmlba=yes
+		;;
+	ia64)
+		AC_MSG_RESULT([ia64])
+		AC_DEFINE_UNQUOTED([QB_ARCH_IA64], [1], [ia64])
+		nongcc_memory_barrier_needed=yes
+		;;
+	arm*)
+		AC_MSG_RESULT([arm])
+		AC_DEFINE_UNQUOTED([QB_ARCH_ARM], [1], [arm])
+		arch_force_shmlba=yes
+		;;
+	hppa*)
+		AC_MSG_RESULT([hppa])
+		AC_DEFINE_UNQUOTED([QB_ARCH_HPPA], [1], [hppa])
+		;;
+	mips*)
+		AC_MSG_RESULT([ia64])
+		AC_DEFINE_UNQUOTED([QB_ARCH_MIPS], [1], [mips])
+		arch_force_shmlba=yes
+		;;
+	*)
+		AC_MSG_RESULT([${host_cpu}])
+		;;
+esac
+
+if test $arch_force_shmlba = yes; then
+	AC_DEFINE_UNQUOTED([QB_FORCE_SHM_ALIGN], [1],
+			   [shared and fixed mmap must align on 16k])
+fi
+
+# OS detection
+# THIS SECTION MUST DIE!
+CP=cp
+AC_MSG_CHECKING([for os in ${host_os}])
+case "$host_os" in
+	*linux*)
+		AC_DEFINE_UNQUOTED([QB_LINUX], [1],
+				   [Compiling for Linux platform])
+		AC_MSG_RESULT([Linux])
+	;;
+	*cygwin*)
+		AC_DEFINE_UNQUOTED([QB_CYGWIN], [1],
+				   [Compiling for Cygwin platform])
+		ac_cv_link_attribute_section=no
+		nongcc_memory_barrier_needed=yes
+		gcc_has_builtin_sync_operations=no
+		AC_MSG_RESULT([Cygwin])
+	;;
+	darwin*)
+		AC_DEFINE_UNQUOTED([QB_DARWIN], [1],
+				   [Compiling for Darwin platform])
+		CP=rsync
+		ac_cv_link_attribute_section=no
+		dnl Attribute section appears to work here but fails later with:
+		dnl cc1: error in backend: Global variable 'descriptor.4902'
+		dnl has an invalid section specifier '__verbose': mach-o
+		dnl section specifier requires a segment and section
+		dnl separated by a comma
+		AC_DEFINE_UNQUOTED([DISABLE_POSIX_THREAD_PROCESS_SHARED], [1],
+				   [Disable _POSIX_THREAD_PROCESS_SHARED])
+		AC_MSG_RESULT([Darwin])
+	;;
+	*bsd*)
+		AC_DEFINE_UNQUOTED([QB_BSD], [1],
+				   [Compiling for BSD platform])
+		case "$host_os" in
+			*netbsd*)
+				# this is because dlopen within a dl_iterate_phdr
+				# callback locks up.
+				ac_cv_link_attribute_section=no
+				AC_DEFINE_UNQUOTED([UNIX_PATH_MAX], [103],
+					   [Unix path length])
+			;;
+			*openbsd*)
+				AC_DEFINE_UNQUOTED([UNIX_PATH_MAX], [104],
+					   [Unix path length])
+			;;
+		esac
+		AC_MSG_RESULT([BSD])
+	;;
+	*solaris*)
+		ac_cv_link_attribute_section=no
+		AC_DEFINE_UNQUOTED(DISABLE_IPC_SHM, 1,
+				   [Disable shared mem ipc])
+		AC_DEFINE_UNQUOTED([QB_SOLARIS], [1],
+				   [Compiling for Solaris platform])
+		CP=rsync
+		AC_MSG_RESULT([Solaris])
+	;;
+	*gnu*)
+		AC_DEFINE_UNQUOTED([QB_GNU], [1],
+				   [Compiling for GNU/Hurd platform])
+		AC_MSG_RESULT([GNU])
+	;;
+	*)
+		AC_MSG_ERROR([Unsupported OS? hmmmm])
+	;;
+esac
+
+dnl break on first hit, fallthrough otherwise, until empty or unsupported
+dnl string reached; output QB_FILE_SYNC macro operates on a file descriptor
+while : ; do
+	case ${file_sync} in
+	fdatasync)
+		test "x${ac_cv_func_fdatasync}" = "xno" || break
+		file_sync=fsync;;
+	fsync)
+		test "x${ac_cv_func_fsync}" = "xno" || break
+		file_sync=;;
+	"")
+		break;;
+	*)
+		AC_MSG_ERROR([Cannot select file sync method]);;
+	esac
+done
+if test "x${file_sync}" != x; then
+	AC_DEFINE_UNQUOTED([QB_FILE_SYNC(fd)], [${file_sync}(fd)], [File sync method])
+else
+	AC_MSG_WARN([No file sync method applicable!])
+	AC_DEFINE([QB_FILE_SYNC(x)], [], [File sync method])
+fi
+
+AC_MSG_CHECKING([whether GCC supports builtin sync intrinsics])
+if test -z "$gcc_has_builtin_sync_operations"; then
+	gcc_has_builtin_sync_operations=no
+	if test x"$GCC" = xyes && test x$have_mingw != xyes; then
+		AC_TRY_LINK([],
+			    [int i;
+			     __sync_synchronize ();
+			     __sync_bool_compare_and_swap (&i, 0, 1);
+			     __sync_fetch_and_add (&i, 1);
+			     ],
+			     [gcc_has_builtin_sync_operations=yes],
+			     [gcc_has_builtin_sync_operations=no])
+	fi
+fi
+AC_MSG_RESULT($gcc_has_builtin_sync_operations)
+AM_CONDITIONAL(HAVE_GCC_BUILTINS_FOR_SYNC_OPERATIONS,
+	       [test "x$gcc_has_builtin_sync_operations" = xyes])
+
+if test "x$gcc_has_builtin_sync_operations" = xyes; then
+	AC_DEFINE_UNQUOTED(HAVE_GCC_BUILTINS_FOR_SYNC_OPERATIONS, 1,
+			   [have builtin sync operations])
+fi
+
+# __atomic_XXX
+AC_MSG_CHECKING([whether GCC supports builtin atomic intrinsics])
+if test -z "$gcc_has_builtin_atomic_operations"; then
+	gcc_has_builtin_atomic_operations=no
+	if test x"$GCC" = xyes && test x$have_mingw != xyes; then
+		AC_TRY_LINK([],
+			    [int i;
+			     __atomic_load_n(&i, __ATOMIC_ACQUIRE);
+			     __atomic_exchange_n(&i, 0, __ATOMIC_RELEASE);
+			     ],
+			     [gcc_has_builtin_atomic_operations=yes],
+			     [gcc_has_builtin_atomic_operations=no])
+	fi
+fi
+AC_MSG_RESULT($gcc_has_builtin_atomic_operations)
+AM_CONDITIONAL(HAVE_GCC_BUILTINS_FOR_ATOMIC_OPERATIONS,
+	       [test "x$gcc_has_builtin_atomic_operations" = xyes])
+
+if test "x$gcc_has_builtin_atomic_operations" = xyes; then
+	AC_DEFINE_UNQUOTED(HAVE_GCC_BUILTINS_FOR_ATOMIC_OPERATIONS, 1,
+			   [have builtin atomic operations])
+fi
+
+
+AC_MSG_CHECKING([whether atomics need memory barrier])
+if test -n "$ac_cv_atomic_need_memory_barrier"; then
+	memory_barrier_needed=$ac_cv_atomic_need_memory_barrier
+else
+	if test x$gcc_has_builtin_sync_operations = xyes; then
+		memory_barrier_needed=yes
+		PACKAGE_FEATURES="$PACKAGE_FEATURES gcc__sync"
+	else
+		memory_barrier_needed=$nongcc_memory_barrier_needed
+		AC_MSG_WARN([-----------------------------])
+		AC_MSG_WARN([You have gcc but not __sync_bool_compare_and_swap])
+		AC_MSG_WARN([try CFLAGS="-march=<your arch> -mtune=native" ./configure])
+		AC_MSG_WARN([-----------------------------])
+	fi
+fi
+AC_MSG_RESULT($memory_barrier_needed)
+
+if test x"$memory_barrier_needed" != xno; then
+	AC_DEFINE_UNQUOTED(QB_ATOMIC_OP_MEMORY_BARRIER_NEEDED, 1,
+			   [need atomic memory barrier])
+fi
+
+LINT_FLAGS="-weak -D__gnuc_va_list=va_list -D__attribute\(x\)= \
+	-badflag -fcnuse -syntax -unrecog -sysunrecog -warnposix \
+	+ignoresigns +matchanyintegral +posixlib \
+	+showscan +showsummary"
+
+# local options
+AC_ARG_ENABLE([ansi],
+  [AS_HELP_STRING([--enable-ansi],[force to build with ANSI standards])])
+
+AC_ARG_ENABLE([fatal-warnings],
+  [AS_HELP_STRING([--enable-fatal-warnings],[enable fatal warnings])])
+
+AC_ARG_ENABLE([debug],
+  [AS_HELP_STRING([--enable-debug],[enable debug build])])
+
+AC_ARG_ENABLE([coverage],
+  [AS_HELP_STRING([--enable-coverage],[coverage analysis of the codebase])])
+
+AC_ARG_ENABLE([interlib-deps],
+  [AS_HELP_STRING([--disable-interlib-deps],
+                  [disable inter-library dependencies (might break builds)])])
+
+AC_ARG_ENABLE([nosection-fallback],
+  [AS_HELP_STRING([--enable-nosection-fallback],
+                  [allow (logging compat-breaking?) fallback when orphan section dead-ended])])
+
+AC_ARG_ENABLE([slow-tests],
+  [AS_HELP_STRING([--enable-slow-tests],[build and run slow tests])])
+
+AC_ARG_WITH([socket-dir],
+  [AS_HELP_STRING([--with-socket-dir=DIR],[socket directory @<:@LOCALSTATEDIR/run@:>@])],
+	[ SOCKETDIR="$withval" ],
+	[ SOCKETDIR="$localstatedir/run" ])
+
+AC_ARG_WITH([force-sockets-config-file],
+  [AS_HELP_STRING([--with-force-sockets-config-file=FILE],[config file to force IPC to use filesystem sockets (Linux & Cygwin only) @<:@SYSCONFDIR/libqb/force-filesystem-sockets@:>@])],
+	[ FORCESOCKETSFILE="$withval" ],
+	[ FORCESOCKETSFILE="$sysconfdir/libqb/force-filesystem-sockets" ])
+
+AC_SUBST(CP)
+# *FLAGS handling goes here
+
+ENV_CFLAGS="$CFLAGS"
+ENV_CPPFLAGS="$CPPFLAGS"
+ENV_LDFLAGS="$LDFLAGS"
+
+# debug build stuff
+if test "x${enable_debug}" = xyes; then
+	AC_DEFINE_UNQUOTED([DEBUG], [1], [Compiling Debugging code])
+	OPT_CFLAGS="-O0"
+	if test "x${GCC}" = xyes; then
+		GDB_FLAGS="-ggdb3"
+	else
+		GDB_FLAGS="-g"
+	fi
+	PACKAGE_FEATURES="$PACKAGE_FEATURES debug"
+fi
+
+# extra warnings
+EXTRA_WARNINGS=""
+
+WARNLIST="
+	all
+	extra
+	unused
+	shadow
+	missing-prototypes
+	missing-declarations
+	suggest-attribute=noreturn
+	suggest-attribute=format
+	strict-prototypes
+	pointer-arith
+	write-strings
+	cast-align
+	bad-function-cast
+	missing-format-attribute
+	float-equal
+	format=2
+	format-signedness
+	shift-overflow=2
+	overlength-strings
+	redundent-decls
+	init-self
+	uninitialized
+	unknown-pragmas
+	no-unused-parameter
+	no-format-nonliteral
+	no-format-truncation
+	no-sign-compare
+	"
+# at least no-sign-compare assumed temporary!
+
+for j in $WARNLIST; do
+	if cc_supports_flag -W$j; then
+		EXTRA_WARNINGS="$EXTRA_WARNINGS -W$j";
+	fi
+done
+
+# warnings suppression
+gcc_format_complaints=no
+if test x"$GCC" = xyes && cc_supports_flag -Wmissing-format-attribute; then
+	gcc_format_complaints=yes
+	AC_DEFINE([HAVE_GCC_MISSING_FORMAT_ATTRIBUTE], [],
+		  [gcc supports -Wmissing-format-attribute])
+fi
+if test x"$GCC" = xyes && cc_supports_flag -Wsuggest-attribute=format; then
+	gcc_format_complaints=yes
+	AC_DEFINE([HAVE_GCC_SUGGEST_ATTRIBUTE_FORMAT], [],
+		  [gcc supports -Wsuggest-attribute=format])
+fi
+dnl pretend GCC (<4.6) is not capable of format complaints when it does not
+dnl support diagnostic push/pop pragmas (cannot track state reliably, then)
+if test x"$gcc_format_complaints" = xyes; then
+	backup_CFLAGS="$CFLAGS"
+	CFLAGS="$CFLAGS -Werror"
+	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+#pragma GCC diagnostic push
+#pragma GCC diagnostic pop
+	]])], AC_DEFINE([HAVE_GCC_FORMAT_COMPLAINTS], [],
+			[gcc can complain about missing format attribute]))
+	CFLAGS="$backup_CFLAGS"
+fi
+
+# --- coverage ---
+if test "x${enable_coverage}" = xyes && \
+		cc_supports_flag -ftest-coverage && \
+		cc_supports_flag -fprofile-arcs ; then
+	AC_MSG_NOTICE([Enabling Coverage (enable -O0 by default)])
+	OPT_CFLAGS="-O0"
+	COVERAGE_CFLAGS="-ftest-coverage -fprofile-arcs"
+	COVERAGE_LDFLAGS="-ftest-coverage -fprofile-arcs"
+	PACKAGE_FEATURES="$PACKAGE_FEATURES coverage"
+else
+	COVERAGE_CFLAGS=""
+	COVERAGE_LDFLAGS=""
+fi
+
+# --- inter-library dependencies ---
+# because of debian/ubuntu swimming against the stream
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=702737,
+# override the libtool variable by force because the current
+# arrangement relies on transitive dependency propagation
+AC_MSG_NOTICE([Enabling inter-library dependencies: $enable_interlib_deps])
+if test "x${enable_interlib_deps}" = xno; then
+    link_all_deplibs=no
+else
+    link_all_deplibs=yes
+fi
+
+# --- slow tests ---
+if test "x${enable_slow_tests}" = xyes ; then
+	AC_DEFINE([HAVE_SLOW_TESTS], 1,[have slow tests])
+	AC_MSG_NOTICE([Enabling Slow tests])
+fi
+AM_CONDITIONAL(HAVE_SLOW_TESTS, [test "x${enable_slow_tests}" = xyes])
+AC_SUBST(HAVE_SLOW_TESTS)
+
+# --- callsite sections ---
+if test "x${GCC}" = xyes; then
+	AX_SAVE_FLAGS
+	AC_MSG_CHECKING([whether GCC supports __attribute__((section()) + ld supports orphan sections])
+	if test "x${ac_cv_link_attribute_section}" = x ; then
+		LDFLAGS="${LDFLAGS_save} -shared -fPIC"  # we are compiling shared lib
+		AC_LINK_IFELSE(
+			[AC_LANG_SOURCE(
+			    [[#include <assert.h>
+			      extern int __start___verbose[], __stop___verbose[];
+			      int test(void) {
+			        static int my_var __attribute__((section("__verbose"))) = 3;
+			        assert("L:non-empty data section"
+			               && __start___verbose != __stop___verbose);
+			        assert("L:no data section value loss"
+			               && my_var == 3  /* for 2.29.1+ */);
+			        return *((int *) __start___verbose); }]]
+			)],
+			[gcc_has_attribute_section=yes; cp "conftest${ac_exeext}" "conftest.so"],
+			[gcc_has_attribute_section=no]
+		)
+		AX_RESTORE_FLAGS
+	else
+		gcc_has_attribute_section=${ac_cv_link_attribute_section}
+	fi
+	AC_MSG_RESULT($gcc_has_attribute_section)
+
+	# in the failing case (e.g. with ld from binutils 2.29), it's likely the
+	# following will fail readily in linkage (hidden symbol `__stop___verbose'
+	# in conftest is referenced by DSO), but keep the sensible test
+	# (in-executable symbol is expected to be propagated into the library,
+	# and to draw the full circle back to the executable through standard
+	# return value passing (respectively no-exec probing to spot the issue);
+	# -rpath passed because LD_LIBRARY_PATH exporting is unwieldy here);
+	# moreover, "my_var" == 3 assertion above (respectively checking if the
+	# boundary symbol visibility differs from DEFAULT in readelf output) is
+	# necessary so that binutils 2.29.1+ will not slip other parts of the
+	# overall is-workaround-needed harness, as it restored some (but not
+	# all) of the original behaviour, but the workaround is still provably
+	# needed
+	if test "x${gcc_has_attribute_section}" = xyes; then
+		AC_MSG_CHECKING([whether linker emits global boundary symbols for orphan sections])
+		LIBS="${LIBS} -L. -l:conftest${shrext_cmds} -Wl,-rpath=$(pwd)"
+		dnl could be turned to AC_TRY_RUN (first assertion is equivalent to
+		dnl the further check in action-if-true), but that would prevent
+		dnl cross-building
+		AC_LINK_IFELSE(
+			[AC_LANG_PROGRAM(
+			    [[#include <assert.h>
+			      extern int __start___verbose[], __stop___verbose[];
+			      int test(void);]],
+			    [[static int my_var __attribute__((section("__verbose"))) = 5;
+			      assert("E:non-empty data section"
+			             && __start___verbose != __stop___verbose);
+			      assert("E:no data section value loss"
+			             && my_var == test() /*5?*/);]]
+			)],
+			[# alternatively something like (but requires number parsing):
+			 #   readelf -SW "conftest${ac_exeext}" \
+			 #   | sed -n '/__verbose/s/^\s*//p' | tr -s ' ' | cut -d" " -f6
+			 verbose_start_addr=$(${NM} -g --portability -- "conftest${ac_exeext}" \
+			                      | grep __start___verbose | cut -d" " -f 3)
+			 verbose_stop_addr=$(${NM} -g --portability -- "conftest${ac_exeext}" \
+			                      | grep __stop___verbose | cut -d" " -f 3)
+			 test "${verbose_start_addr}" = "${verbose_stop_addr}" \
+			   && gcc_has_attribute_section_visible=no \
+			   || { verbose_start_type=$(${READELF} -s backup \
+			                             | sed -n '/__start___verbose/{s/^\s*//p;q}' \
+			                             | tr -s ' ' \
+			                             | cut -d" " -f6)
+			        test "${verbose_start_type}" = DEFAULT \
+			          && gcc_has_attribute_section_visible=yes \
+			          || gcc_has_attribute_section_visible=no; }],
+			[gcc_has_attribute_section_visible=no]
+		)
+		AX_RESTORE_FLAGS
+		AC_MSG_RESULT($gcc_has_attribute_section_visible)
+		rm -f "conftest${shrext_cmds}"
+
+		if test "x${gcc_has_attribute_section_visible}" = xno; then
+			# check if the linker script based workaround is
+			# feasible at all, otherwise fallback to using no
+			# section attribute while making some noise about it
+			# as combining with-without accustomed logging
+			# participants is currently uncharted waters
+			AC_MSG_CHECKING([whether linker workaround for orphan sections usable])
+			>conftest.ld cat <<-EOF
+			SECTIONS {
+			  __verbose : {
+			    __start___verbose = .;
+			    *(__verbose);
+			    __stop___verbose = .;
+			  }
+			}
+			EOF
+			LDFLAGS="${LDFLAGS} -Wl,conftest.ld"
+			AC_LINK_IFELSE(
+				[AC_LANG_PROGRAM(
+				    [[#include <assert.h>
+				      extern int __start___verbose[], __stop___verbose[];
+				      int test(void);]],
+				    [[static int my_var __attribute__((section("__verbose"))) = 5;
+				      assert("E:non-empty data section"
+				             && __start___verbose != __stop___verbose);
+				      assert("E:no data section value loss"
+				             && my_var == 5);]]
+				)],
+				[],
+				[gcc_has_attribute_section=no]
+			)
+			AX_RESTORE_FLAGS
+			AC_MSG_RESULT([$gcc_has_attribute_section])
+			rm -f "conftest.ld"
+		fi
+
+		if test "x${gcc_has_attribute_section}" = xyes; then
+			AC_DEFINE([QB_HAVE_ATTRIBUTE_SECTION], 1,
+				  [Enabling code using __attribute__((section))])
+			AC_SUBST([client_dlopen_LIBS],[$dlopen_LIBS])
+			if test "x${gcc_has_attribute_section_visible}" = xyes; then
+				PACKAGE_FEATURES="$PACKAGE_FEATURES attribute-section"
+			else
+				AC_DEFINE([QB_NEED_ATTRIBUTE_SECTION_WORKAROUND], 1,
+					  [Enabling code using __attribute__((section))])
+				PACKAGE_FEATURES="$PACKAGE_FEATURES attribute-section-workaround"
+			fi
+		elif test "x${enable_nosection_fallback}" = xyes; then
+			AC_MSG_NOTICE([Falling back to not using orphan section])
+		else
+			AC_MSG_ERROR([Would use section attribute, cannot; see --enable-nosection-fallback])
+		fi
+	fi
+fi
+AM_CONDITIONAL(HAVE_GCC_ATTRIBUTE_SECTION, [test "x${gcc_has_attribute_section}" = xyes])
+AM_CONDITIONAL(NEED_GCC_ATTRIBUTE_SECTION_WORKAROUND,
+	       [test "x${gcc_has_attribute_section}" = xyes \
+		&& test "x${gcc_has_attribute_section_visible}" != xyes])
+
+# --- ansi ---
+if test "x${enable_ansi}" = xyes && \
+		cc_supports_flag -std=iso9899:199409 ; then
+	AC_MSG_NOTICE([Enabling ANSI Compatibility])
+	ANSI_CPPFLAGS="-ansi -D_GNU_SOURCE -DANSI_ONLY"
+	PACKAGE_FEATURES="$PACKAGE_FEATURES ansi"
+else
+	ANSI_CPPFLAGS=""
+fi
+
+# --- fatal warnings ---
+if test "x${enable_fatal_warnings}" = xyes && \
+		cc_supports_flag -Werror ; then
+	AC_MSG_NOTICE([Enabling Fatal Warnings (-Werror)])
+	WERROR_CFLAGS="-Werror"
+	PACKAGE_FEATURES="$PACKAGE_FEATURES fatal-warnings"
+else
+	WERROR_CFLAGS=""
+fi
+
+# final build of *FLAGS
+CFLAGS="$ENV_CFLAGS $OPT_CFLAGS $GDB_FLAGS \
+	$COVERAGE_CFLAGS $EXTRA_WARNINGS $WERROR_CFLAGS"
+CPPFLAGS="$ENV_CPPFLAGS $ANSI_CPPFLAGS"
+LDFLAGS="$ENV_LDFLAGS $COVERAGE_LDFLAGS"
+
+if test -f /usr/share/dict/words ; then
+	HAVE_DICT_WORDS=yes
+	AC_DEFINE([HAVE_DICT_WORDS], 1, "Have /usr/share/dict/words")
+fi
+AM_CONDITIONAL([HAVE_DICT_WORDS], [test "x$HAVE_DICT_WORDS" = xyes])
+
+# substitute what we need:
+AC_SUBST([SOCKETDIR])
+AC_SUBST([LINT_FLAGS])
+AC_SUBST([FORCESOCKETSFILE])
+
+AC_DEFINE_UNQUOTED([SOCKETDIR], "$(eval echo ${SOCKETDIR})", [Socket directory])
+AC_DEFINE_UNQUOTED([LOCALSTATEDIR], "$(eval echo ${localstatedir})", [localstate directory])
+AC_DEFINE_UNQUOTED([PACKAGE_FEATURES], "${PACKAGE_FEATURES}", [quarterback built-in features])
+
+AC_DEFINE_UNQUOTED([FORCESOCKETSFILE], "$(eval echo ${FORCESOCKETSFILE})", [for sockets config file])
+
+# version parsing (for qbconfig.h)
+AC_DEFINE_UNQUOTED([QB_VER_MAJOR],
+                   [$(echo "${VERSION}" \
+		      | sed -e 's|^\([[0-9]][[0-9]]*\).*|\1|' \
+		            -e t -e 's|.*|1|')],
+		   [libqb major version])
+AC_DEFINE_UNQUOTED([QB_VER_MINOR],
+                   [$(echo "${VERSION}" \
+		      | sed -e 's|^[[0-9]][[0-9]]*\.\([[0-9]][[0-9]]*\).*|\1|' \
+		            -e t -e 's|.*|0|')],
+		   [libqb minor version])
+AC_DEFINE_UNQUOTED([QB_VER_MICRO],
+	           [$(echo "${VERSION}" \
+		      | sed -e 's|^[[0-9]][[0-9]]*\.[[0-9]][[0-9]]*\.\([[0-9]][[0-9]]*\).*|\1|' \
+		            -e t -e 's|.*|0|')],
+		   [libqb patch version])
+AC_DEFINE_UNQUOTED([QB_VER_REST],
+	           [$(echo "${VERSION}" \
+		      | sed -e 's|^[[0-9]][[0-9]]*\(\.[[0-9]][[0-9]]*\)\{0,2\}\(.*\)|"\2"|' \
+		            -e t -e 's|.*|""|')],
+		   [libqb patch version])
+
+AC_CONFIG_FILES([Makefile
+		 include/Makefile
+		 include/qb/Makefile
+		 lib/Makefile
+		 lib/libqb.pc
+		 tools/Makefile
+		 tests/Makefile
+		 tests/functional/Makefile
+		 tests/functional/log_external/Makefile
+		 tests/functional/log_internal/Makefile
+		 tests/test.conf
+		 examples/Makefile
+		 docs/Makefile
+		 docs/common.dox
+		 docs/html.dox
+		 docs/man.dox
+		 lib/qblog_script.la:lib/qblog_script.la.in])
+
+AC_CONFIG_LINKS([lib/qblog_script_noop.ld:lib/qblog_script_noop.ld
+		 tests/functional/GNUmakefile:tests/functional/GNUmakefile])
+
+AC_OUTPUT
+
+AC_MSG_RESULT([])
+AC_MSG_RESULT([$PACKAGE configuration:])
+AC_MSG_RESULT([  Version                  = ${VERSION}])
+AC_MSG_RESULT([  Prefix                   = ${prefix}])
+AC_MSG_RESULT([  Executables              = ${sbindir}])
+AC_MSG_RESULT([  Man pages                = ${mandir}])
+AC_MSG_RESULT([  Doc dir                  = ${docdir}])
+AC_MSG_RESULT([  Libraries                = ${libdir}])
+AC_MSG_RESULT([  Header files             = ${includedir}])
+AC_MSG_RESULT([  Arch-independent files   = ${datadir}])
+AC_MSG_RESULT([  State information        = ${localstatedir}])
+AC_MSG_RESULT([  System configuration     = ${sysconfdir}])
+AC_MSG_RESULT([  SOCKETDIR                = ${SOCKETDIR}])
+AC_MSG_RESULT([  Features                 = ${PACKAGE_FEATURES}])
+AC_MSG_RESULT([])
+AC_MSG_RESULT([$PACKAGE build info:])
+AC_MSG_RESULT([  Optimization             = ${OPT_CFLAGS}])
+AC_MSG_RESULT([  Debug options            = ${GDB_CFLAGS}])
+AC_MSG_RESULT([  Extra compiler warnings  = ${EXTRA_WARNING}])
+AC_MSG_RESULT([  Env. defined CFLAG       = ${ENV_CFLAGS}])
+AC_MSG_RESULT([  Env. defined CPPFLAGS    = ${ENV_CPPFLAGS}])
+AC_MSG_RESULT([  Env. defined LDFLAGS     = ${ENV_LDFLAGS}])
+AC_MSG_RESULT([  ANSI defined CPPFLAGS    = ${ANSI_CPPFLAGS}])
+AC_MSG_RESULT([  Coverage     CFLAGS      = ${COVERAGE_CFLAGS}])
+AC_MSG_RESULT([  Coverage     LDFLAGS     = ${COVERAGE_LDFLAGS}])
+AC_MSG_RESULT([  Fatal War.   CFLAGS      = ${WERROR_CFLAGS}])
+AC_MSG_RESULT([  Final        CFLAGS      = ${CFLAGS}])
+AC_MSG_RESULT([  Final        CPPFLAGS    = ${CPPFLAGS}])
+AC_MSG_RESULT([  Final        LDFLAGS     = ${LDFLAGS}])

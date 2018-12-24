@@ -1,0 +1,1162 @@
+ dpkg-buildpackage -D -us -uc -ui -b -Jauto -Pnobiarch,nocheck,nodoc
+dpkg-buildpackage: info: source package libqb
+dpkg-buildpackage: info: source version 1.0.3-2
+dpkg-buildpackage: info: source distribution unstable
+dpkg-buildpackage: info: source changed by Ferenc Wágner <wferi@debian.org>
+ dpkg-source --before-build .
+dpkg-buildpackage: info: host architecture amd64
+ fakeroot debian/rules clean
+dh clean
+   dh_clean
+FAKEROOTKEY=114874667 LD_LIBRARY_PATH=:/opt/intel/lib/intel64_lin:/opt/intel/tbb/lib/intel64/gcc4.7 LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libfakeroot/libfakeroot-sysv.so debian/rules clean
+ debian/rules build
+dh build
+   dh_update_autotools_config
+   dh_autoreconf
+libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, 'build-aux'.
+libtoolize: copying file 'build-aux/ltmain.sh'
+libtoolize: putting macros in AC_CONFIG_MACRO_DIRS, 'm4'.
+libtoolize: copying file 'm4/libtool.m4'
+libtoolize: copying file 'm4/ltoptions.m4'
+libtoolize: copying file 'm4/ltsugar.m4'
+libtoolize: copying file 'm4/ltversion.m4'
+libtoolize: copying file 'm4/lt~obsolete.m4'
+configure.ac:14: installing 'build-aux/compile'
+configure.ac:16: installing 'build-aux/missing'
+examples/Makefile.am: installing 'build-aux/depcomp'
+   debian/rules override_dh_auto_configure
+make[1]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+dh_auto_configure -- \
+	--with-socket-dir=/tmp \
+	--disable-static
+	./configure --build=x86_64-linux-gnu --prefix=/usr --includedir=\${prefix}/include --mandir=\${prefix}/share/man --infodir=\${prefix}/share/info --sysconfdir=/etc --localstatedir=/var --disable-silent-rules --libdir=\${prefix}/lib/x86_64-linux-gnu --libexecdir=\${prefix}/lib/x86_64-linux-gnu --runstatedir=/run --disable-maintainer-mode --disable-dependency-tracking --with-socket-dir=/tmp --disable-static
+configure: WARNING: unrecognized options: --disable-maintainer-mode
+configure: loading site script /usr/share/config.site
+Intel(R) Parallel Studio XE 2019 Update 1 for Linux*
+Copyright (C) 2009-2018 Intel Corporation. All rights reserved.
+checking for gcc... ccache icc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether ccache icc accepts -g... yes
+checking for ccache icc option to accept ISO C89... none needed
+checking whether ccache icc understands -c and -o together... yes
+checking how to run the C preprocessor... ccache icc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for a BSD-compatible install... /usr/bin/install
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... /usr/bin/gawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports the include directive... yes (GNU style)
+checking whether make supports nested variables... yes
+checking dependency style of ccache icc... none
+checking whether make supports nested variables... (cached) yes
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking how to print strings... printf
+checking for a sed that does not truncate output... /bin/sed
+checking for fgrep... /bin/grep -F
+checking for ld used by ccache icc... xild -m elf_x86_64
+checking if the linker (xild -m elf_x86_64) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/x86_64-linux-gnu-nm -B
+checking the name lister (/usr/bin/x86_64-linux-gnu-nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for xild -m elf_x86_64 option to reload object files... -r
+checking for objdump... /usr/bin/x86_64-linux-gnu-objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for archiver @FILE support... @
+checking for strip... /usr/bin/x86_64-linux-gnu-strip
+checking for ranlib... xiar s
+checking command to parse /usr/bin/x86_64-linux-gnu-nm -B output from ccache icc object... ok
+checking for sysroot... no
+checking for a working dd... /bin/dd
+checking how to truncate binary pipes... /bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if ccache icc supports -fno-rtti -fno-exceptions... yes
+checking for ccache icc option to produce PIC... -fPIC -DPIC
+checking if ccache icc PIC flag -fPIC -DPIC works... yes
+checking if ccache icc static flag -static works... no
+checking if ccache icc supports -c -o file.o... yes
+checking if ccache icc supports -c -o file.o... (cached) yes
+checking whether the ccache icc linker (xild -m elf_x86_64 -m elf_x86_64) supports shared libraries... xild: warning #10013: no objects specified for multi-file optimization
+xild: executing 'ld'
+yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... no
+configure: building in place srcdir:.
+checking whether we are using the GNU C++ compiler... yes
+checking whether ccache icpc accepts -g... yes
+checking dependency style of ccache icpc... none
+checking how to run the C++ preprocessor... ccache icpc -E
+checking for ld used by ccache icpc... xild -m elf_x86_64 -m elf_x86_64
+checking if the linker (xild -m elf_x86_64 -m elf_x86_64) is GNU ld... yes
+checking whether the ccache icpc linker (xild -m elf_x86_64 -m elf_x86_64) supports shared libraries... yes
+checking for ccache icpc option to produce PIC... -fPIC -DPIC
+checking if ccache icpc PIC flag -fPIC -DPIC works... yes
+checking if ccache icpc static flag -static works... no
+checking if ccache icpc supports -c -o file.o... yes
+checking if ccache icpc supports -c -o file.o... (cached) yes
+checking whether the ccache icpc linker (xild -m elf_x86_64 -m elf_x86_64) supports shared libraries... yes
+checking dynamic linker characteristics... (cached) GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking for gawk... (cached) /usr/bin/gawk
+checking for gcc... (cached) ccache icc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether ccache icc accepts -g... (cached) yes
+checking for ccache icc option to accept ISO C89... (cached) none needed
+checking whether ccache icc understands -c and -o together... (cached) yes
+checking how to run the C preprocessor... ccache icc -E
+checking for ccache icc option to accept ISO C99... none needed
+checking whether ln -s works... yes
+checking whether make sets $(MAKE)... (cached) yes
+checking for pkg-config... pkg-config
+checking for doxygen... doxygen
+checking for splint... no
+checking for eu-readelf... no
+checking for readelf... readelf
+checking for a Python interpreter with version >= 2.6... python
+checking for python... /usr/bin/python
+checking for python version... 2.7
+checking for python platform... linux2
+checking for python script directory... ${prefix}/lib/python2.7/dist-packages
+checking for python extension module directory... ${exec_prefix}/lib/python2.7/dist-packages
+configure: Sanitizing prefix: /usr
+configure: Sanitizing exec_prefix: NONE
+checking whether ccache icc is Clang... no
+checking whether pthreads work with -pthread... yes
+checking for joinable pthread attribute... PTHREAD_CREATE_JOINABLE
+checking whether more special flags are required for pthreads... no
+checking for PTHREAD_PRIO_INHERIT... yes
+checking for library containing dlopen... none required
+checking for library containing socket... none required
+checking for library containing gethostbyname... none required
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking for CHECK... yes
+checking for GLIB... yes
+checking for ANSI C header files... (cached) yes
+checking for sys/wait.h that is POSIX.1 compatible... yes
+checking arpa/inet.h usability... yes
+checking arpa/inet.h presence... yes
+checking for arpa/inet.h... yes
+checking link.h usability... yes
+checking link.h presence... yes
+checking for link.h... yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking for inttypes.h... (cached) yes
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking netinet/in.h usability... yes
+checking netinet/in.h presence... yes
+checking for netinet/in.h... yes
+checking for stdint.h... (cached) yes
+checking stddef.h usability... yes
+checking stddef.h presence... yes
+checking for stddef.h... yes
+checking for stdlib.h... (cached) yes
+checking for string.h... (cached) yes
+checking for strings.h... (cached) yes
+checking for dlfcn.h... (cached) yes
+checking time.h usability... yes
+checking time.h presence... yes
+checking for time.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking for sys/types.h... (cached) yes
+checking for sys/stat.h... (cached) yes
+checking sys/param.h usability... yes
+checking sys/param.h presence... yes
+checking for sys/param.h... yes
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking for sys/time.h... (cached) yes
+checking sys/poll.h usability... yes
+checking sys/poll.h presence... yes
+checking for sys/poll.h... yes
+checking sys/epoll.h usability... yes
+checking sys/epoll.h presence... yes
+checking for sys/epoll.h... yes
+checking sys/uio.h usability... yes
+checking sys/uio.h presence... yes
+checking for sys/uio.h... yes
+checking sys/event.h usability... no
+checking sys/event.h presence... no
+checking for sys/event.h... no
+checking sys/sockio.h usability... no
+checking sys/sockio.h presence... no
+checking for sys/sockio.h... no
+checking sys/un.h usability... yes
+checking sys/un.h presence... yes
+checking for sys/un.h... yes
+checking sys/resource.h usability... yes
+checking sys/resource.h presence... yes
+checking for sys/resource.h... yes
+checking syslog.h usability... yes
+checking syslog.h presence... yes
+checking for syslog.h... yes
+checking errno.h usability... yes
+checking errno.h presence... yes
+checking for errno.h... yes
+checking for unistd.h... (cached) yes
+checking sys/mman.h usability... yes
+checking sys/mman.h presence... yes
+checking for sys/mman.h... yes
+checking sys/sem.h usability... yes
+checking sys/sem.h presence... yes
+checking for sys/sem.h... yes
+checking sys/ipc.h usability... yes
+checking sys/ipc.h presence... yes
+checking for sys/ipc.h... yes
+checking sys/msg.h usability... yes
+checking sys/msg.h presence... yes
+checking for sys/msg.h... yes
+checking netdb.h usability... yes
+checking netdb.h presence... yes
+checking for netdb.h... yes
+checking for uid_t in sys/types.h... yes
+checking for inline... inline
+checking for int32_t... yes
+checking for int64_t... yes
+checking for int8_t... yes
+checking for mode_t... yes
+checking for pid_t... yes
+checking for size_t... yes
+checking for ssize_t... yes
+checking for uint64_t... yes
+checking for uint32_t... yes
+checking for uint16_t... yes
+checking for uint8_t... yes
+checking for struct sockaddr_un.sun_len... no
+checking looking for union semun in sys/sem.h... no
+checking for a working clock_getres(CLOCK_MONOTONIC, &ts)... yes
+checking for unistd.h... (cached) yes
+checking for working chown... yes
+checking vfork.h usability... no
+checking vfork.h presence... no
+checking for vfork.h... no
+checking for fork... yes
+checking for vfork... yes
+checking for working fork... yes
+checking for working vfork... (cached) yes
+checking for stdlib.h... (cached) yes
+checking for unistd.h... (cached) yes
+checking for sys/param.h... (cached) yes
+checking for getpagesize... yes
+checking for working mmap... yes
+checking whether strerror_r is declared... yes
+checking for strerror_r... yes
+checking whether strerror_r returns char *... yes
+checking for alarm... yes
+checking for clock_gettime... yes
+checking for fsync... yes
+checking for fdatasync... yes
+checking for ftruncate... yes
+checking for gettimeofday... yes
+checking for localtime... yes
+checking for localtime_r... yes
+checking for memset... yes
+checking for munmap... yes
+checking for socket... yes
+checking for strchr... yes
+checking for strrchr... yes
+checking for strdup... yes
+checking for strstr... yes
+checking for strcasecmp... yes
+checking for poll... yes
+checking for epoll_create... yes
+checking for epoll_create1... yes
+checking for kqueue... no
+checking for random... yes
+checking for rand... yes
+checking for getrlimit... yes
+checking for sysconf... yes
+checking for getpeerucred... no
+checking for getpeereid... no
+checking for openat... yes
+checking for unlinkat... yes
+checking for pthread_spin_lock... yes
+checking for pthread_setschedparam... yes
+checking for pthread_mutexattr_setpshared... yes
+checking for pthread_condattr_setpshared... yes
+checking for sem_timedwait... yes
+checking for semtimedop... yes
+checking for MSG_NOSIGNAL... yes
+checking for SO_NOSIGPIPE ... no
+checking for RTLD_NEXT... yes
+checking for strlcpy... no
+checking for strlcat... no
+checking for strchrnul... yes
+checking for architecture in x86_64... x86_64
+checking for os in linux-gnu... Linux
+checking whether GCC supports builtin sync intrinsics... yes
+checking whether GCC supports builtin atomic intrinsics... yes
+checking whether atomics need memory barrier... yes
+checking whether ccache icc supports "-Wall"... yes
+checking whether ccache icc supports "-Wextra"... yes
+checking whether ccache icc supports "-Wunused"... yes
+checking whether ccache icc supports "-Wshadow"... yes
+checking whether ccache icc supports "-Wmissing-prototypes"... yes
+checking whether ccache icc supports "-Wmissing-declarations"... yes
+checking whether ccache icc supports "-Wsuggest-attribute=noreturn"... yes
+checking whether ccache icc supports "-Wsuggest-attribute=format"... yes
+checking whether ccache icc supports "-Wstrict-prototypes"... yes
+checking whether ccache icc supports "-Wpointer-arith"... yes
+checking whether ccache icc supports "-Wwrite-strings"... yes
+checking whether ccache icc supports "-Wcast-align"... yes
+checking whether ccache icc supports "-Wbad-function-cast"... yes
+checking whether ccache icc supports "-Wmissing-format-attribute"... yes
+checking whether ccache icc supports "-Wfloat-equal"... yes
+checking whether ccache icc supports "-Wformat=2"... yes
+checking whether ccache icc supports "-Wformat-signedness"... yes
+checking whether ccache icc supports "-Wshift-overflow=2"... yes
+checking whether ccache icc supports "-Woverlength-strings"... yes
+checking whether ccache icc supports "-Wredundent-decls"... yes
+checking whether ccache icc supports "-Winit-self"... yes
+checking whether ccache icc supports "-Wuninitialized"... yes
+checking whether ccache icc supports "-Wunknown-pragmas"... yes
+checking whether ccache icc supports "-Wno-unused-parameter"... yes
+checking whether ccache icc supports "-Wno-format-nonliteral"... yes
+checking whether ccache icc supports "-Wno-format-truncation"... yes
+checking whether ccache icc supports "-Wno-sign-compare"... yes
+checking whether ccache icc supports "-Wmissing-format-attribute"... yes
+checking whether ccache icc supports "-Wsuggest-attribute=format"... yes
+configure: Enabling inter-library dependencies: 
+checking whether GCC supports __attribute__((section()) + ld supports orphan sections... yes
+checking whether linker emits global boundary symbols for orphan sections... readelf: Error: 'backup': No such file
+no
+checking whether linker workaround for orphan sections usable... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating include/Makefile
+config.status: creating include/qb/Makefile
+config.status: creating lib/Makefile
+config.status: creating lib/libqb.pc
+config.status: creating tools/Makefile
+config.status: creating tests/Makefile
+config.status: creating tests/functional/Makefile
+config.status: creating tests/functional/log_external/Makefile
+config.status: creating tests/functional/log_internal/Makefile
+config.status: creating tests/test.conf
+config.status: creating examples/Makefile
+config.status: creating docs/Makefile
+config.status: creating docs/common.dox
+config.status: creating docs/html.dox
+config.status: creating docs/man.dox
+config.status: creating lib/qblog_script.la
+config.status: creating include/config.h
+config.status: creating include/qb/qbconfig.h
+config.status: include/qb/qbconfig.h is unchanged
+config.status: executing depfiles commands
+config.status: executing libtool commands
+configure: WARNING: unrecognized options: --disable-maintainer-mode
+
+libqb configuration:
+  Version                  = 1.0.3
+  Prefix                   = /usr
+  Executables              = ${exec_prefix}/sbin
+  Man pages                = ${prefix}/share/man
+  Doc dir                  = ${datarootdir}/doc/${PACKAGE_TARNAME}
+  Libraries                = ${prefix}/lib/x86_64-linux-gnu
+  Header files             = ${prefix}/include
+  Arch-independent files   = ${datarootdir}
+  State information        = /var
+  System configuration     = /etc
+  SOCKETDIR                = /tmp
+  Features                 =  epoll gcc__sync attribute-section-workaround
+
+libqb build info:
+  Optimization             = 
+  Debug options            = 
+  Extra compiler warnings  = 
+  Env. defined CFLAG       = -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security
+  Env. defined CPPFLAGS    = -Wdate-time -D_FORTIFY_SOURCE=2
+  Env. defined LDFLAGS     = -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs
+  ANSI defined CPPFLAGS    = 
+  Coverage     CFLAGS      = 
+  Coverage     LDFLAGS     = 
+  Fatal War.   CFLAGS      = 
+  Final        CFLAGS      = -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare 
+  Final        CPPFLAGS    = -Wdate-time -D_FORTIFY_SOURCE=2 
+  Final        LDFLAGS     = -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs 
+make[1]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+   debian/rules override_dh_auto_build-indep
+make[1]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+/usr/bin/make doxygen
+make[2]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+/usr/bin/make -C docs doxygen
+make[3]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs'
+mkdir -p html
+doxygen html.dox
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:53: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:54: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:61: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:62: warning: Found unknown command `\idx'
+make[3]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs'
+make[2]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+rm docs/html/*.md5
+make[1]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+   dh_auto_build -Nlibqb-doc
+	make -j8
+make[1]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+make  all-recursive
+make[2]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+Making all in include
+make[3]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include'
+make  all-recursive
+make[4]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include'
+Making all in qb
+make[5]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb'
+make  all-am
+make[6]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb'
+make[6]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb'
+make[5]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb'
+make[5]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include'
+make[5]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include'
+make[4]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include'
+make[3]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include'
+Making all in lib
+make[3]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib'
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-util.lo `test -f 'util.c' || echo './'`util.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-hdb.lo `test -f 'hdb.c' || echo './'`hdb.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-ringbuffer.lo `test -f 'ringbuffer.c' || echo './'`ringbuffer.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-ringbuffer_helper.lo `test -f 'ringbuffer_helper.c' || echo './'`ringbuffer_helper.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-array.lo `test -f 'array.c' || echo './'`array.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-loop.lo `test -f 'loop.c' || echo './'`loop.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-loop_poll.lo `test -f 'loop_poll.c' || echo './'`loop_poll.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-loop_job.lo `test -f 'loop_job.c' || echo './'`loop_job.c
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c ringbuffer.c  -fPIC -DPIC -o .libs/libqb_la-ringbuffer.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c hdb.c  -fPIC -DPIC -o .libs/libqb_la-hdb.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c loop.c  -fPIC -DPIC -o .libs/libqb_la-loop.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c ringbuffer_helper.c  -fPIC -DPIC -o .libs/libqb_la-ringbuffer_helper.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c util.c  -fPIC -DPIC -o .libs/libqb_la-util.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c array.c  -fPIC -DPIC -o .libs/libqb_la-array.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c loop_job.c  -fPIC -DPIC -o .libs/libqb_la-loop_job.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c loop_poll.c  -fPIC -DPIC -o .libs/libqb_la-loop_poll.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.13 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.16 (CPU)       0.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.12 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.15 (CPU)       0.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.14 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.17 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-loop_timerlist.lo `test -f 'loop_timerlist.c' || echo './'`loop_timerlist.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-ipcc.lo `test -f 'ipcc.c' || echo './'`ipcc.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-ipcs.lo `test -f 'ipcs.c' || echo './'`ipcs.c
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.15 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.18 (CPU)       0.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+loop.c(93): warning #188: enumerated type mixed with another type
+  		l->level[p].priority = p;
+  		                     ^
+
+Front end time                       0.16 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.19 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-ipc_shm.lo `test -f 'ipc_shm.c' || echo './'`ipc_shm.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-ipc_setup.lo `test -f 'ipc_setup.c' || echo './'`ipc_setup.c
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.16 (CPU)       0.00 (elapsed)
+Back end time                        0.04 (CPU)       0.00 (elapsed)
+Total compilation time               0.20 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-ipc_socket.lo `test -f 'ipc_socket.c' || echo './'`ipc_socket.c
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.17 (CPU)       0.00 (elapsed)
+Back end time                        0.05 (CPU)       0.00 (elapsed)
+Total compilation time               0.23 (CPU)       0.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.18 (CPU)       0.00 (elapsed)
+Back end time                        0.06 (CPU)       0.00 (elapsed)
+Total compilation time               0.23 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-log.lo `test -f 'log.c' || echo './'`log.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-log_thread.lo `test -f 'log_thread.c' || echo './'`log_thread.c
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c ipcs.c  -fPIC -DPIC -o .libs/libqb_la-ipcs.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c ipc_shm.c  -fPIC -DPIC -o .libs/libqb_la-ipc_shm.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c loop_timerlist.c  -fPIC -DPIC -o .libs/libqb_la-loop_timerlist.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c ipc_setup.c  -fPIC -DPIC -o .libs/libqb_la-ipc_setup.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c ipcc.c  -fPIC -DPIC -o .libs/libqb_la-ipcc.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c ipc_socket.c  -fPIC -DPIC -o .libs/libqb_la-ipc_socket.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c log.c  -fPIC -DPIC -o .libs/libqb_la-log.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c log_thread.c  -fPIC -DPIC -o .libs/libqb_la-log_thread.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.16 (CPU)       1.00 (elapsed)
+Back end time                        0.04 (CPU)       0.00 (elapsed)
+Total compilation time               0.20 (CPU)       1.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.18 (CPU)       1.00 (elapsed)
+Back end time                        0.07 (CPU)       0.00 (elapsed)
+Total compilation time               0.25 (CPU)       1.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-log_blackbox.lo `test -f 'log_blackbox.c' || echo './'`log_blackbox.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-log_file.lo `test -f 'log_file.c' || echo './'`log_file.c
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.18 (CPU)       1.00 (elapsed)
+Back end time                        0.04 (CPU)       0.00 (elapsed)
+Total compilation time               0.22 (CPU)       1.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-log_syslog.lo `test -f 'log_syslog.c' || echo './'`log_syslog.c
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.14 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.17 (CPU)       0.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.20 (CPU)       1.00 (elapsed)
+Back end time                        0.06 (CPU)       0.00 (elapsed)
+Total compilation time               0.26 (CPU)       1.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-log_dcs.lo `test -f 'log_dcs.c' || echo './'`log_dcs.c
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+ipc_socket.c(112): warning #2218: result of call is not used
+  		chown(local_address.sun_path, -1, gid);
+  		^
+
+Front end time                       0.19 (CPU)       0.00 (elapsed)
+Back end time                        0.07 (CPU)       0.00 (elapsed)
+Total compilation time               0.26 (CPU)       0.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+ipcc.c(48): warning #188: enumerated type mixed with another type
+  	c->response.type = response.connection_type;
+  	                 ^
+
+ipcc.c(49): warning #188: enumerated type mixed with another type
+  	c->request.type = response.connection_type;
+  	                ^
+
+ipcc.c(50): warning #188: enumerated type mixed with another type
+  	c->event.type = response.connection_type;
+  	              ^
+
+ipcc.c(51): warning #188: enumerated type mixed with another type
+  	c->setup.type = response.connection_type;
+  	              ^
+
+Front end time                       0.17 (CPU)       0.00 (elapsed)
+Back end time                        0.04 (CPU)       0.00 (elapsed)
+Total compilation time               0.21 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-log_format.lo `test -f 'log_format.c' || echo './'`log_format.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-map.lo `test -f 'map.c' || echo './'`map.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-skiplist.lo `test -f 'skiplist.c' || echo './'`skiplist.c
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c log_blackbox.c  -fPIC -DPIC -o .libs/libqb_la-log_blackbox.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c log_file.c  -fPIC -DPIC -o .libs/libqb_la-log_file.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.20 (CPU)       0.00 (elapsed)
+Back end time                        0.08 (CPU)       0.00 (elapsed)
+Total compilation time               0.28 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-hashtable.lo `test -f 'hashtable.c' || echo './'`hashtable.c
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c log_syslog.c  -fPIC -DPIC -o .libs/libqb_la-log_syslog.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c log_dcs.c  -fPIC -DPIC -o .libs/libqb_la-log_dcs.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c log_format.c  -fPIC -DPIC -o .libs/libqb_la-log_format.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c map.c  -fPIC -DPIC -o .libs/libqb_la-map.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c skiplist.c  -fPIC -DPIC -o .libs/libqb_la-skiplist.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c hashtable.c  -fPIC -DPIC -o .libs/libqb_la-hashtable.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.14 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.16 (CPU)       0.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.14 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.16 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-trie.lo `test -f 'trie.c' || echo './'`trie.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-unix.lo `test -f 'unix.c' || echo './'`unix.c
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.16 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.20 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2  -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o libqb_la-loop_poll_epoll.lo `test -f 'loop_poll_epoll.c' || echo './'`loop_poll_epoll.c
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.16 (CPU)       0.00 (elapsed)
+Back end time                        0.06 (CPU)       1.00 (elapsed)
+Total compilation time               0.22 (CPU)       1.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.14 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       1.00 (elapsed)
+Total compilation time               0.16 (CPU)       1.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o strlcpy.lo strlcpy.c
+/bin/bash ../libtool  --tag=CC   --mode=compile ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o strlcat.lo strlcat.c
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.14 (CPU)       1.00 (elapsed)
+Back end time                        0.04 (CPU)       0.00 (elapsed)
+Total compilation time               0.18 (CPU)       1.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.15 (CPU)       1.00 (elapsed)
+Back end time                        0.04 (CPU)       0.00 (elapsed)
+Total compilation time               0.18 (CPU)       1.00 (elapsed)
+ccache icc -E -xc -I../include -D_GNU_SOURCE -C -P qblog_script.ld.in \
+  | sed -n "/$(sed -n '/^[^#]/{s/[*\/]/\\&/g;p;q;}' qblog_script.ld.in)/,$ p" \
+  > qblog_script.ld
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c unix.c  -fPIC -DPIC -o .libs/libqb_la-unix.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c trie.c  -fPIC -DPIC -o .libs/libqb_la-trie.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.19 (CPU)       1.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.21 (CPU)       1.00 (elapsed)
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c loop_poll_epoll.c  -fPIC -DPIC -o .libs/libqb_la-loop_poll_epoll.o
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c strlcpy.c  -fPIC -DPIC -o .libs/strlcpy.o
+Front end time                       0.05 (CPU)       0.00 (elapsed)
+Total compilation time               0.06 (CPU)       0.00 (elapsed)
+libtool: compile:  ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2 -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -c strlcat.c  -fPIC -DPIC -o .libs/strlcat.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.13 (CPU)       0.00 (elapsed)
+Back end time                        0.05 (CPU)       0.00 (elapsed)
+Total compilation time               0.19 (CPU)       0.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.14 (CPU)       0.00 (elapsed)
+Back end time                        0.04 (CPU)       0.00 (elapsed)
+Total compilation time               0.18 (CPU)       0.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.12 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.14 (CPU)       0.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.12 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.13 (CPU)       0.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.16 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.19 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc -pthread -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -version-info 19:0:19 -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o libqb.la -rpath /usr/lib/x86_64-linux-gnu libqb_la-util.lo libqb_la-hdb.lo libqb_la-ringbuffer.lo libqb_la-ringbuffer_helper.lo libqb_la-array.lo libqb_la-loop.lo libqb_la-loop_poll.lo libqb_la-loop_job.lo libqb_la-loop_timerlist.lo libqb_la-ipcc.lo libqb_la-ipcs.lo libqb_la-ipc_shm.lo libqb_la-ipc_setup.lo libqb_la-ipc_socket.lo libqb_la-log.lo libqb_la-log_thread.lo libqb_la-log_blackbox.lo libqb_la-log_file.lo libqb_la-log_syslog.lo libqb_la-log_dcs.lo libqb_la-log_format.lo libqb_la-map.lo libqb_la-skiplist.lo libqb_la-hashtable.lo libqb_la-trie.lo libqb_la-unix.lo  libqb_la-loop_poll_epoll.lo   strlcpy.lo strlcat.lo    qblog_script.la 
+libtool: link: ccache icc -shared  -fPIC -DPIC  .libs/libqb_la-util.o .libs/libqb_la-hdb.o .libs/libqb_la-ringbuffer.o .libs/libqb_la-ringbuffer_helper.o .libs/libqb_la-array.o .libs/libqb_la-loop.o .libs/libqb_la-loop_poll.o .libs/libqb_la-loop_job.o .libs/libqb_la-loop_timerlist.o .libs/libqb_la-ipcc.o .libs/libqb_la-ipcs.o .libs/libqb_la-ipc_shm.o .libs/libqb_la-ipc_setup.o .libs/libqb_la-ipc_socket.o .libs/libqb_la-log.o .libs/libqb_la-log_thread.o .libs/libqb_la-log_blackbox.o .libs/libqb_la-log_file.o .libs/libqb_la-log_syslog.o .libs/libqb_la-log_dcs.o .libs/libqb_la-log_format.o .libs/libqb_la-map.o .libs/libqb_la-skiplist.o .libs/libqb_la-hashtable.o .libs/libqb_la-trie.o .libs/libqb_la-unix.o .libs/libqb_la-loop_poll_epoll.o .libs/strlcpy.o .libs/strlcat.o   /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script_noop.ld  -pthread -g -O2 -march=native -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs   -pthread -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -Wl,-soname -Wl,libqb.so.0 -o .libs/libqb.so.0.19.0
+ipo: warning #11003: no IR in object file /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script_noop.ld; was the source file compiled with -ipo
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+libtool: link: (cd ".libs" && rm -f "libqb.so.0" && ln -s "libqb.so.0.19.0" "libqb.so.0")
+libtool: link: (cd ".libs" && rm -f "libqb.so" && ln -s "libqb.so.0.19.0" "libqb.so")
+libtool: link: ( cd ".libs" && rm -f "libqb.la" && ln -s "../libqb.la" "libqb.la" )
+make[3]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib'
+Making all in docs
+make[3]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs'
+mkdir -p man3
+mkdir -p man3
+mkdir -p man3
+mkdir -p man3
+mkdir -p man3
+mkdir -p man3
+mkdir -p man3
+mkdir -p man3
+doxygen man.dox
+doxygen man.dox
+doxygen man.dox
+doxygen man.dox
+doxygen man.dox
+doxygen man.dox
+doxygen man.dox
+doxygen man.dox
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:53: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:53: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:53: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:54: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:54: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:54: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:53: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:54: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:53: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:54: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:53: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:54: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:53: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:54: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:53: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:54: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:61: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:61: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:61: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:61: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:61: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:61: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:62: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:62: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:62: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:62: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:62: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:62: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:61: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:62: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:61: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:62: warning: Found unknown command `\idx'
+mkdir -p man3
+doxygen man.dox
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:53: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb/qbarray.h:54: warning: Found unknown command `\idx'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:61: warning: Found unknown command `\max_elements'
+/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs/mainpage.h:62: warning: Found unknown command `\idx'
+make[3]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs'
+Making all in tools
+make[3]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tools'
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o qb_blackbox-qb_blackbox.o `test -f 'qb_blackbox.c' || echo './'`qb_blackbox.c
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.09 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.10 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o qb-blackbox qb_blackbox-qb_blackbox.o ../lib/libqb.la 
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/qb-blackbox qb_blackbox-qb_blackbox.o  ../lib/.libs/libqb.so -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+ipo: remark #11001: performing single-file optimizations
+ipo: remark #11006: generating object file /tmp/ipo_iccM9q2kX.o
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+make[3]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tools'
+Making all in tests
+make[3]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests'
+Making all in functional
+make[4]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests/functional'
+make[5]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests/functional'
+make[5]: Nothing to be done for 'GNUmakefile'.
+make[5]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests/functional'
+# do not trigger automatically, it's for on-demand use
+Use 'make all' within particular subdirectories
+make[4]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests/functional'
+make[4]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests'
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o bmc.o bmc.c
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o bmcpt.o bmcpt.c
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o bms-bms.o `test -f 'bms.c' || echo './'`bms.c
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o rbreader.o rbreader.c
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o rbwriter.o rbwriter.c
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o bench_log-bench-log.o `test -f 'bench-log.c' || echo './'`bench-log.c
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o format_compare_speed.o format_compare_speed.c
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o loop.o loop.c
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.11 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.14 (CPU)       0.00 (elapsed)
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o print_ver.o print_ver.c
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.14 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.15 (CPU)       0.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.11 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.13 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o bmcpt bmcpt.o ../lib/libqb.la 
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o rbreader rbreader.o ../lib/libqb.la 
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.12 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.15 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o bench-log bench_log-bench-log.o  ../lib/libqb.la 
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.18 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.21 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o bmc bmc.o ../lib/libqb.la 
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.14 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.16 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o rbwriter rbwriter.o ../lib/libqb.la 
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.16 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.19 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o format_compare_speed format_compare_speed.o ../lib/libqb.la 
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+print_ver.c(42): warning #1028: unknown warning specifier
+  _Pragma(MSG)
+          ^
+
+Front end time                       0.12 (CPU)       0.00 (elapsed)
+Back end time                        0.01 (CPU)       0.00 (elapsed)
+Total compilation time               0.13 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o loop loop.o ../lib/libqb.la 
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+bms.c(212): warning #188: enumerated type mixed with another type
+  	g_io_add_watch(channel, evts, gio_read_socket, adaptor);
+  	                        ^
+
+Front end time                       0.27 (CPU)       0.00 (elapsed)
+Back end time                        0.05 (CPU)       0.00 (elapsed)
+Total compilation time               0.32 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o print_ver print_ver.o  
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/rbreader rbreader.o  ../lib/.libs/libqb.so -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/bmc bmc.o  ../lib/.libs/libqb.so -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/bench-log bench_log-bench-log.o  ../lib/.libs/libqb.so -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/bmcpt bmcpt.o  ../lib/.libs/libqb.so -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/rbwriter rbwriter.o  ../lib/.libs/libqb.so -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+ipo: remark #11001: performing single-file optimizations
+ipo: remark #11006: generating object file /tmp/ipo_iccfCdfpb.o
+ipo: remark #11001: performing single-file optimizations
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/format_compare_speed format_compare_speed.o  ../lib/.libs/libqb.so -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+ipo: remark #11006: generating object file /tmp/ipo_iccT92ltf.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+ipo: remark #11001: performing single-file optimizations
+ipo: remark #11001: performing single-file optimizations
+ipo: remark #11001: performing single-file optimizations
+ipo: remark #11006: generating object file /tmp/ipo_iccVqxVXb.o
+ipo: remark #11006: generating object file /tmp/ipo_iccMZ2JU7.o
+ipo: remark #11006: generating object file /tmp/ipo_iccdvCq79.o
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o print_ver print_ver.o 
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o bms bms-bms.o ../lib/libqb.la -lglib-2.0 
+ipo: remark #11001: performing single-file optimizations
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/loop loop.o  ../lib/.libs/libqb.so -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+ipo: remark #11006: generating object file /tmp/ipo_icc6lKONs.o
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+ipo: remark #11001: performing single-file optimizations
+ipo: remark #11006: generating object file /tmp/ipo_iccMvQCak.o
+ipo: remark #11001: performing single-file optimizations
+ipo: remark #11006: generating object file /tmp/ipo_iccoBEELO.o
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/bms bms-bms.o  ../lib/.libs/libqb.so -lglib-2.0 -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+ipo: remark #11001: performing single-file optimizations
+ipo: remark #11006: generating object file /tmp/ipo_iccCZuzGY.o
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+make[4]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests'
+make[3]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests'
+Making all in examples
+make[3]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/examples'
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o mapnotify-mapnotify.o `test -f 'mapnotify.c' || echo './'`mapnotify.c
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o simplelog-simplelog.o `test -f 'simplelog.c' || echo './'`simplelog.c
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o tcpclient-tcpclient.o `test -f 'tcpclient.c' || echo './'`tcpclient.c
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o tcpserver-tcpserver.o `test -f 'tcpserver.c' || echo './'`tcpserver.c
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o ipcclient-ipcclient.o `test -f 'ipcclient.c' || echo './'`ipcclient.c
+ccache icc -DHAVE_CONFIG_H -I. -I../include -I../include/qb  -I../include -I../include -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare  -c -o ipcserver-ipcserver.o `test -f 'ipcserver.c' || echo './'`ipcserver.c
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.13 (CPU)       0.00 (elapsed)
+Back end time                        0.02 (CPU)       0.00 (elapsed)
+Total compilation time               0.15 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o tcpclient tcpclient-tcpclient.o ../lib/libqb.la   
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.14 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.17 (CPU)       0.00 (elapsed)
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.15 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.18 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o mapnotify mapnotify-mapnotify.o ../lib/libqb.la 
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o ipcclient ipcclient-ipcclient.o ../lib/libqb.la 
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.15 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.17 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o tcpserver tcpserver-tcpserver.o ../lib/libqb.la  
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+Front end time                       0.15 (CPU)       0.00 (elapsed)
+Back end time                        0.03 (CPU)       0.00 (elapsed)
+Total compilation time               0.19 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o simplelog simplelog-simplelog.o ../lib/libqb.la 
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+ipcserver.c(249): warning #188: enumerated type mixed with another type
+  	adaptor->source = g_io_add_watch_full(channel, G_PRIORITY_DEFAULT, evts, gio_read_socket, adaptor, gio_poll_destroy);
+  	                                                                   ^
+
+Front end time                       0.31 (CPU)       0.00 (elapsed)
+Back end time                        0.06 (CPU)       0.00 (elapsed)
+Total compilation time               0.36 (CPU)       0.00 (elapsed)
+/bin/bash ../libtool  --tag=CC   --mode=link ccache icc  -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security   	  -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare   -Wl,-z,relro -Wl,-z,now -Wl,--as-needed,--gc-sections,--relax -Wl,-z,defs  -o ipcserver ipcserver-ipcserver.o ../lib/libqb.la -lglib-2.0 
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/tcpclient tcpclient-tcpclient.o  ../lib/.libs/libqb.so -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/tcpserver tcpserver-tcpserver.o  ../lib/.libs/libqb.so -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/ipcclient ipcclient-ipcclient.o  ../lib/.libs/libqb.so -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/simplelog simplelog-simplelog.o  ../lib/.libs/libqb.so -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/mapnotify mapnotify-mapnotify.o  ../lib/.libs/libqb.so -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+ipo: remark #11001: performing single-file optimizations
+ipo: remark #11006: generating object file /tmp/ipo_icccG94Uy.o
+ipo: remark #11001: performing single-file optimizations
+ipo: remark #11001: performing single-file optimizations
+ipo: remark #11006: generating object file /tmp/ipo_iccAUkqtx.o
+ipo: remark #11001: performing single-file optimizations
+ipo: remark #11006: generating object file /tmp/ipo_iccJfRyvx.o
+ipo: remark #11001: performing single-file optimizations
+ipo: remark #11006: generating object file /tmp/ipo_iccQEU8HB.o
+ipo: remark #11006: generating object file /tmp/ipo_iccO8ifIB.o
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+libtool: link: ccache icc -g -O2 -fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=. -Wformat -march=native -pipe -fstack-security-check -Wformat-security -Wall -Wextra -Wunused -Wshadow -Wmissing-prototypes -Wmissing-declarations -Wsuggest-attribute=noreturn -Wsuggest-attribute=format -Wstrict-prototypes -Wpointer-arith -Wwrite-strings -Wcast-align -Wbad-function-cast -Wmissing-format-attribute -Wfloat-equal -Wformat=2 -Wformat-signedness -Wshift-overflow=2 -Woverlength-strings -Wredundent-decls -Winit-self -Wuninitialized -Wunknown-pragmas -Wno-unused-parameter -Wno-format-nonliteral -Wno-format-truncation -Wno-sign-compare -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,--as-needed -Wl,--gc-sections -Wl,--relax -Wl,-z -Wl,defs -o .libs/ipcserver ipcserver-ipcserver.o  ../lib/.libs/libqb.so -lglib-2.0 -Wl,/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld -pthread
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+icc: command line warning #10006: ignoring unknown option '-fdebug-prefix-map=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb=.'
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+ipo: remark #11001: performing single-file optimizations
+ipo: remark #11006: generating object file /tmp/ipo_iccI3VYrT.o
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+/usr/bin/x86_64-linux-gnu-ld: warning: /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib/qblog_script.ld contains output sections; did you forget -T?
+make[3]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/examples'
+make[3]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+make[3]: Nothing to be done for 'all-am'.
+make[3]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+make[2]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+make[1]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+   dh_auto_test -Nlibqb-doc
+   create-stamp debian/debhelper-build-stamp
+ fakeroot debian/rules binary
+dh binary
+   dh_testroot
+   dh_prep
+   debian/rules override_dh_auto_install-arch
+make[1]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+dh_auto_install
+	make -j1 install DESTDIR=/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp AM_UPDATE_INFO_DIR=no
+make[2]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+make  install-recursive
+make[3]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+Making install in include
+make[4]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include'
+Making install in qb
+make[5]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb'
+make[6]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb'
+make[6]: Nothing to be done for 'install-exec-am'.
+ /bin/mkdir -p '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/include/qb/'
+ /usr/bin/install -m 644 qbhdb.h qblist.h qbdefs.h qbatomic.h qbloop.h qbrb.h qbutil.h qbarray.h qbipcc.h qbipcs.h qbipc_common.h qblog.h qbconfig.h qbmap.h '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/include/qb/'
+make[6]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb'
+make[5]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include/qb'
+make[5]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include'
+make[6]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include'
+make[6]: Nothing to be done for 'install-exec-am'.
+make[6]: Nothing to be done for 'install-data-am'.
+make[6]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include'
+make[5]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include'
+make[4]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/include'
+Making install in lib
+make[4]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib'
+make[5]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib'
+ /bin/mkdir -p '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu'
+ /bin/bash ../libtool   --mode=install /usr/bin/install   libqb.la '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu'
+libtool: install: /usr/bin/install .libs/libqb.so.0.19.0 /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu/libqb.so.0.19.0
+libtool: install: (cd /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu && { ln -s -f libqb.so.0.19.0 libqb.so.0 || { rm -f libqb.so.0 && ln -s libqb.so.0.19.0 libqb.so.0; }; })
+libtool: install: (cd /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu && { ln -s -f libqb.so.0.19.0 libqb.so || { rm -f libqb.so && ln -s libqb.so.0.19.0 libqb.so; }; })
+libtool: install: /usr/bin/install .libs/libqb.lai /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu/libqb.la
+libtool: warning: remember to run 'libtool --finish /usr/lib/x86_64-linux-gnu'
+ /bin/mkdir -p '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu/pkgconfig'
+ /usr/bin/install -m 644 libqb.pc '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu/pkgconfig'
+make  install-exec-hook
+make[6]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib'
+target=$(ls -l "/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu/libqb.so" || :); \
+  target=${target#* -> }; t1_bn=$(basename "${target}" || :); \
+  while test -n "${t1_bn}"; do t2_bn=${t1_bn%.*[0-9]*}; \
+  test "${t2_bn}" != libqb.so || break; \
+  test -L "${t2_bn}" || { t1_bn=${t2_bn}; continue; }; \
+  t2_target=$(ls -l "${t2_bn}" || break); t2_target=${t2_target#* -> }; \
+  test "${t2_target}" = "${target}" || break; \
+  t1_bn=${t2_bn}; done; test -n "${t1_bn}" || \
+  { echo "only applicable to SO symlink scheme"; exit 1; }; \
+  echo "${t1_bn}" > "/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu/libqb.so-t"
+so_ver=$(cat "/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu/libqb.so-t"); \
+  echo "INPUT(${so_ver})" > "/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu/libqb.so-t"; \
+  cat qblog_script.ld >> "/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu/libqb.so-t"; \
+  sed -i -- "s/libqb.so.<digit>/${so_ver}/" \
+    "/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu/libqb.so-t" "/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu/pkgconfig/libqb.pc"
+mv -f "/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu/libqb.so-t" "/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/lib/x86_64-linux-gnu/libqb.so"
+make[6]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib'
+make[5]: Nothing to be done for 'install-data-am'.
+make[5]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib'
+make[4]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/lib'
+Making install in docs
+make[4]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs'
+make[5]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs'
+make[5]: Nothing to be done for 'install-exec-am'.
+ /bin/mkdir -p '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/share/man/man3'
+ /usr/bin/install -m 644 man3/qbarray.h.3 man3/qbatomic.h.3 man3/qbdefs.h.3 man3/qbhdb.h.3 man3/qbipc_common.h.3 man3/qbipcc.h.3 man3/qbipcs.h.3 man3/qblist.h.3 man3/qblog.h.3 man3/qbloop.h.3 man3/qbmap.h.3 man3/qbrb.h.3 man3/qbutil.h.3 '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/share/man/man3'
+ /bin/mkdir -p '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/share/man/man8'
+ /usr/bin/install -m 644 man8/qb-blackbox.8 '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/share/man/man8'
+make[5]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs'
+make[4]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/docs'
+Making install in tools
+make[4]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tools'
+make[5]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tools'
+ /bin/mkdir -p '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/sbin'
+  /bin/bash ../libtool   --mode=install /usr/bin/install qb-blackbox '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/sbin'
+libtool: warning: '../lib/libqb.la' has not been installed in '/usr/lib/x86_64-linux-gnu'
+libtool: install: /usr/bin/install .libs/qb-blackbox /dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/sbin/qb-blackbox
+make[5]: Nothing to be done for 'install-data-am'.
+make[5]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tools'
+make[4]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tools'
+Making install in tests
+make[4]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests'
+Making install in functional
+make[5]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests/functional'
+make[6]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests/functional'
+make[6]: Nothing to be done for 'GNUmakefile'.
+make[6]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests/functional'
+# definitely not desired to install anything from this subtree
+make[5]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests/functional'
+make[5]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests'
+make[6]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests'
+make[6]: Nothing to be done for 'install-exec-am'.
+make[6]: Nothing to be done for 'install-data-am'.
+make[6]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests'
+make[5]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests'
+make[4]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/tests'
+Making install in examples
+make[4]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/examples'
+make[5]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/examples'
+make[5]: Nothing to be done for 'install-exec-am'.
+make[5]: Nothing to be done for 'install-data-am'.
+make[5]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/examples'
+make[4]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/examples'
+make[4]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+make[5]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+make[5]: Nothing to be done for 'install-exec-am'.
+ /bin/mkdir -p '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/share/doc/libqb'
+ /usr/bin/install -m 644 COPYING INSTALL README.markdown '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb/debian/tmp/usr/share/doc/libqb'
+make[5]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+make[4]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+make[3]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+make[2]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+rm -v debian/tmp/usr/lib/*/lib*.la
+removed 'debian/tmp/usr/lib/x86_64-linux-gnu/libqb.la'
+cd debian/tmp/usr/share/doc/libqb && \
+    rm -v COPYING INSTALL README.markdown
+removed 'COPYING'
+removed 'INSTALL'
+removed 'README.markdown'
+make[1]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+   dh_install
+   debian/rules override_dh_installdocs
+make[1]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+dh_installdocs -A README.markdown
+make[1]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+   dh_installchangelogs
+   dh_installman
+   dh_lintian
+   dh_perl
+   dh_link
+   dh_strip_nondeterminism
+   dh_compress
+   dh_fixperms
+   debian/rules override_dh_missing
+make[1]: Entering directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+dh_missing --fail-missing
+make[1]: Leaving directory '/dev/shm/systemd/test/deps/test/lvm2/tmp/corosync/tmp/libqb/libqb'
+   dh_strip
+   dh_makeshlibs
+dpkg-gensymbols: warning: some new symbols appeared in the symbols file: see diff output below
+dpkg-gensymbols: warning: debian/libqb0/DEBIAN/symbols doesn't match completely debian/libqb0.symbols
+--- debian/libqb0.symbols (libqb0_1.0.3-2_amd64)
++++ dpkg-gensymbols6ufJls	2018-12-24 09:27:03.086997810 +0100
+@@ -1,7 +1,43 @@
+ libqb.so.0 libqb0 #MINVER#
+ * Build-Depends-Package: libqb-dev
++ __cacheSize@Base 1.0.3-2
++ __intel_avx_rep_memcpy@Base 1.0.3-2
++ __intel_avx_rep_memset@Base 1.0.3-2
++ __intel_memcpy@Base 1.0.3-2
++ __intel_memset@Base 1.0.3-2
++ __intel_mic_avx512f_memcpy@Base 1.0.3-2
++ __intel_mic_avx512f_memset@Base 1.0.3-2
++ __intel_new_memcpy@Base 1.0.3-2
++ __intel_new_memset@Base 1.0.3-2
++ __intel_security_check_cookie@Base 1.0.3-2
++ __intel_security_cookie@Base 1.0.3-2
++ __intel_security_init_cookie@Base 1.0.3-2
++ __intel_sse4_atol@Base 1.0.3-2
++ __intel_sse4_strchr@Base 1.0.3-2
++ __intel_sse4_strdup@Base 1.0.3-2
++ __intel_sse4_strend@Base 1.0.3-2
++ __intel_sse4_strlen@Base 1.0.3-2
++ __intel_sse4_strncmp@Base 1.0.3-2
++ __intel_sse4_strrchr@Base 1.0.3-2
++ __intel_ssse3_memcpy@Base 1.0.3-2
++ __intel_ssse3_rep_memcpy@Base 1.0.3-2
++ __intel_ssse3_strncpy@Base 1.0.3-2
+  (arch=!powerpc !powerpcspe !ppc64 !ppc64el)__start___verbose@Base 0.11.1
+  (arch=!powerpc !powerpcspe !ppc64 !ppc64el)__stop___verbose@Base 0.11.1
++ _intel_fast_memcpy.A@Base 1.0.3-2
++ _intel_fast_memcpy.J@Base 1.0.3-2
++ _intel_fast_memcpy.M@Base 1.0.3-2
++ _intel_fast_memcpy.P@Base 1.0.3-2
++ _intel_fast_memcpy.V@Base 1.0.3-2
++ _intel_fast_memcpy.Z@Base 1.0.3-2
++ _intel_fast_memcpy.a@Base 1.0.3-2
++ _intel_fast_memcpy@Base 1.0.3-2
++ _intel_fast_memset.A@Base 1.0.3-2
++ _intel_fast_memset.J@Base 1.0.3-2
++ _intel_fast_memset.V@Base 1.0.3-2
++ _intel_fast_memset.Z@Base 1.0.3-2
++ _intel_fast_memset.a@Base 1.0.3-2
++ _intel_fast_memset@Base 1.0.3-2
+  qb_array_create@Base 0.11.1
+  qb_array_create_2@Base 0.11.1
+  qb_array_elems_per_bin_get@Base 0.11.1
+   dh_shlibdeps
+dpkg-shlibdeps: warning: deprecated use of LD_LIBRARY_PATH with private library directory which interferes with cross-building, please use -l option instead
+dpkg-shlibdeps: warning: deprecated use of LD_LIBRARY_PATH with private library directory which interferes with cross-building, please use -l option instead
+dpkg-shlibdeps: warning: can't extract name and version from library name 'libiomp5.so'
+dpkg-shlibdeps: warning: can't extract name and version from library name 'libiomp5.so'
+dpkg-shlibdeps: warning: can't extract name and version from library name 'libiomp5.so'
+dpkg-shlibdeps: warning: can't extract name and version from library name 'libiomp5.so'
+dpkg-shlibdeps: warning: can't extract name and version from library name 'libiomp5.so'
+dpkg-shlibdeps: warning: can't extract name and version from library name 'libiomp5.so'
+dpkg-shlibdeps: warning: can't extract name and version from library name 'libiomp5.so'
+dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/libqb-dev/usr/sbin/qb-blackbox was not linked against libdl.so.2 (it uses none of the library's symbols)
+dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/libqb-dev/usr/sbin/qb-blackbox was not linked against libpthread.so.0 (it uses none of the library's symbols)
+   dh_installdeb
+   dh_gencontrol
+   dh_md5sums
+   dh_builddeb
+dpkg-deb: building package 'libqb-doc' in '../libqb-doc_1.0.3-2_all.deb'.
+dpkg-deb: building package 'libqb0' in '../libqb0_1.0.3-2_amd64.deb'.
+dpkg-deb: building package 'libqb-dev' in '../libqb-dev_1.0.3-2_amd64.deb'.
+dpkg-deb: building package 'libqb-dev-dbgsym' in '../libqb-dev-dbgsym_1.0.3-2_amd64.deb'.
+dpkg-deb: building package 'libqb0-dbgsym' in '../libqb0-dbgsym_1.0.3-2_amd64.deb'.
+FAKEROOTKEY=1009444060 LD_LIBRARY_PATH=:/opt/intel/lib/intel64_lin:/opt/intel/tbb/lib/intel64/gcc4.7 LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libfakeroot/libfakeroot-sysv.so debian/rules binary
+ dpkg-genbuildinfo --build=binary
+ dpkg-genchanges --build=binary >../libqb_1.0.3-2_amd64.changes
+dpkg-genchanges: info: binary-only upload (no source code included)
+ dpkg-source --after-build .
+dpkg-source: info: unapplying Fix-spelling-plaform-platform.patch
+dpkg-source: info: unapplying hurd-the-socket-tests-are-expected-to-fail.patch
+dpkg-source: info: unapplying tests-always-run-the-SHM-suite-just-expect-failures.patch
+dpkg-source: info: unapplying hurd-definition-of-PATH_MAX-must-be-included-separately.patch
+dpkg-source: info: unapplying hurd-dev-shm-is-a-tmpfs-here-as-well.patch
+dpkg-buildpackage: info: binary-only upload (no source included)
+Now running lintian libqb_1.0.3-2_amd64.changes ...
+E: libqb0: symbols-file-contains-current-version-with-debian-revision on symbol __cacheSize@Base and 35 others
+W: libqb-dev: hardening-no-pie usr/sbin/qb-blackbox
+Finished running lintian.

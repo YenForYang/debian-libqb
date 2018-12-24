@@ -1,0 +1,3 @@
+Depends: libqb-dev, gcc, libc6-dev, pkg-config
+Tests: ipc
+Restrictions: allow-stderr

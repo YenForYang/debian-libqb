@@ -1,0 +1,61 @@
+.TH "qb_log_callsite" 3 "Sun Dec 2 2018" "Version 1.0.3" "libqb" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+qb_log_callsite \- An instance of this structure is created in a special ELF section at every dynamic debug callsite\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <qblog\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "const char * \fBfunction\fP"
+.br
+.ti -1c
+.RI "const char * \fBfilename\fP"
+.br
+.ti -1c
+.RI "const char * \fBformat\fP"
+.br
+.ti -1c
+.RI "uint8_t \fBpriority\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBlineno\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBtargets\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBtags\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+An instance of this structure is created in a special ELF section at every dynamic debug callsite\&. 
+
+At runtime, the special section is treated as an array of these\&. 
+.SH "Field Documentation"
+.PP 
+.SS "const char* qb_log_callsite::filename"
+
+.SS "const char* qb_log_callsite::format"
+
+.SS "const char* qb_log_callsite::function"
+
+.SS "uint32_t qb_log_callsite::lineno"
+
+.SS "uint8_t qb_log_callsite::priority"
+
+.SS "uint32_t qb_log_callsite::tags"
+
+.SS "uint32_t qb_log_callsite::targets"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libqb from the source code\&.

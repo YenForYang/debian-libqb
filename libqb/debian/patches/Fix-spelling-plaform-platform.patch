@@ -1,0 +1,21 @@
+From: =?utf-8?q?Ferenc_W=C3=A1gner?= <wferi@debian.org>
+Date: Wed, 14 Mar 2018 10:24:20 +0100
+Subject: Fix spelling: plaform -> platform
+
+---
+ docs/man8/qb-blackbox.8 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/docs/man8/qb-blackbox.8 b/docs/man8/qb-blackbox.8
+index 3df924d..fe07c0d 100644
+--- a/docs/man8/qb-blackbox.8
++++ b/docs/man8/qb-blackbox.8
+@@ -30,7 +30,7 @@ recorded using libqb's blackbox mechanism.
+ Due to variations amongst platforms, some of which directly impact
+ the libqb's blackbox format handling (e.g. page size), there's currently
+ only the commitment that \fBqb-blackbox\fR shall decode the blackbox files
+-recorded at the same plaform (plus the same page size) while using libqb
++recorded at the same platform (plus the same page size) while using libqb
+ compiled with the same relevant compile-time options
+ (e.g. \fBUSE_CACHE_LINE_ALIGNMENT\fR) as linked to this decoder.
+ Otherwise, your mileage may vary.

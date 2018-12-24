@@ -1,0 +1,101 @@
+.TH "qb_ipc_overview" 3 "Sun Dec 2 2018" "Version 1.0.3" "libqb" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+qb_ipc_overviewIPC Overview 
+ \- Client IPC API\&.
+.PP
+\fBOverview\fP
+.RS 4
+libqb provides a generically reusable very high performance shared memory IPC system for client and service applications\&. It supports many features including:
+.IP "\(bu" 2
+Multiple transport implementations
+.IP "  1." 6
+Shared memory implementation for very high performance\&.
+.IP "  2." 6
+Unix sockets
+.PP
+
+.IP "\(bu" 2
+A synchronous request/response channel and asynchronous response channel per ipc connection\&.
+.IP "\(bu" 2
+User defined private data per IPC connection\&.
+.IP "\(bu" 2
+Ability to call a function per service on ipc connection and disconnection\&.
+.IP "\(bu" 2
+Authenticated IPC connection with ability for developer to define which UIDs and GIDs are valid at connection time\&.
+.IP "\(bu" 2
+Fully abstracted poll system so that any poll library may be used\&.
+.IP "\(bu" 2
+User defined selector for determining the proper function to call per service and id\&.
+.PP
+.RE
+.PP
+\fBSecurity\fP
+.RS 4
+The ipc system uses default operating system security mechanics to ensure ipc connections are validated\&. A callback used with \fBqb_ipcs_create()\fP is called for every new ipc connection with the parameters of UID and GID\&. The callback then determines if the UID and GID are authenticated for communication\&.
+.RE
+.PP
+\fBPerformance\fP
+.RS 4
+For performance, QB_IPC_SHM (shared memory) is recommended\&. It is tuned for very high performance\&.
+.RE
+.PP
+\fBMultithreading\fP
+.RS 4
+There are not many guarantees about the ipc system being thread-safe\&. It is essential that all sends and all receives are in their own thread, though having separate threads for each is supported\&.
+.RE
+.PP
+If you need to send on multiple threads then either use locking around the calls or create a separate connection for each thread\&.
+.PP
+\fBIPC sockets (Linux only)\fP
+.RS 4
+On Linux IPC, abstract (non-filesystem) sockets are used by default\&. If you need to override this (say in a net=host container) and use sockets that reside in the filesystem, then you need to create a file called /etc/libqb/force-filesystem-sockets
+.IP "\(bu" 2
+this is the default name and can be changed at \&./configure time\&. The file does not need to contain any content, it's not a configuration file as such, just its presence will activate the feature\&.
+.PP
+.RE
+.PP
+Note that this is a global option and read each time a new IPC connection (client or server) is created\&. So, to avoid having clients that cannot connect to running servers it is STRONGLY recommended to only create or remove this file prior to a system reboot or container restart\&.
+.PP
+\fBClient API\fP
+.RS 4
+
+.RE
+.PP
+\fBLifecycle of an IPC connection\&.\fP
+.RS 4
+An IPC connection is made to the server with \fBqb_ipcc_connect()\fP\&. This function connects to the server and requests channels be created for communication\&. To disconnect, the client either exits or executes the function \fBqb_ipcc_disconnect()\fP\&.
+.RE
+.PP
+\fBSynchronous communication\fP
+.RS 4
+The function \fBqb_ipcc_sendv_recv()\fP sends an iovector request and receives a response\&.
+.RE
+.PP
+\fBAsynchronous requests from the client\fP
+.RS 4
+The function \fBqb_ipcc_sendv()\fP sends an iovector request\&. The function \fBqb_ipcc_send()\fP sends an message buffer request\&.
+.RE
+.PP
+\fBAsynchronous events from the server\fP
+.RS 4
+The \fBqb_ipcc_event_recv()\fP function receives an out-of-band asynchronous message\&. The asynchronous messages are queued and can provide very high out-of-band performance\&. To determine when to call \fBqb_ipcc_event_recv()\fP the \fBqb_ipcc_fd_get()\fP call is used to obtain a file descriptor used in the poll() or select() system calls\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBqbipcc\&.h\fP
+.RE
+.PP
+\fBServer API\fP
+.RS 4
+Server IPC API\&.
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBqbipcs\&.h\fP 
+.RE
+.PP
+

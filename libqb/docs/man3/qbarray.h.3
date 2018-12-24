@@ -1,0 +1,210 @@
+.TH "qbarray.h" 3 "Sun Dec 2 2018" "Version 1.0.3" "libqb" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+qbarray.h \- This is a dynamic array (it can grow, but without moving memory)\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <qb/qbdefs\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBQB_ARRAY_MAX_INDEX_BITS\fP   16"
+.br
+.ti -1c
+.RI "#define \fBQB_ARRAY_MAX_ELEMENTS\fP   (1 << \fBQB_ARRAY_MAX_INDEX_BITS\fP)"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct qb_array \fBqb_array_t\fP"
+.br
+.RI "This is an opaque data type representing an instance of an array\&. "
+.ti -1c
+.RI "typedef void(* \fBqb_array_new_bin_cb_fn\fP) (\fBqb_array_t\fP *a, uint32_t bin)"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBqb_array_t\fP * \fBqb_array_create\fP (size_t max_elements, size_t element_size)"
+.br
+.RI "Create an array with fixed sized elements\&. "
+.ti -1c
+.RI "\fBqb_array_t\fP * \fBqb_array_create_2\fP (size_t max_elements, size_t element_size, size_t autogrow_elements)"
+.br
+.RI "Create an array with fixed sized elements\&. "
+.ti -1c
+.RI "int32_t \fBqb_array_index\fP (\fBqb_array_t\fP *a, int32_t idx, void **element_out)"
+.br
+.RI "Get an element at a particular index\&. "
+.ti -1c
+.RI "int32_t \fBqb_array_grow\fP (\fBqb_array_t\fP *a, size_t max_elements)"
+.br
+.RI "Grow the array\&. "
+.ti -1c
+.RI "size_t \fBqb_array_num_bins_get\fP (\fBqb_array_t\fP *a)"
+.br
+.RI "Get the number of bins used by the array\&. "
+.ti -1c
+.RI "size_t \fBqb_array_elems_per_bin_get\fP (\fBqb_array_t\fP *a)"
+.br
+.RI "Get the number of elements per bin\&. "
+.ti -1c
+.RI "int32_t \fBqb_array_new_bin_cb_set\fP (\fBqb_array_t\fP *a, \fBqb_array_new_bin_cb_fn\fP fn)"
+.br
+.RI "Get a callback when a new bin is allocated\&. "
+.ti -1c
+.RI "void \fBqb_array_free\fP (\fBqb_array_t\fP *a)"
+.br
+.RI "Free all the memory used by the array\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+This is a dynamic array (it can grow, but without moving memory)\&. 
+
+
+.PP
+.nf
+arr = qb_array_create_2(64, sizeof(struct my_struct), 256);
+\&.\&.\&.
+res = qb_array_index(arr, idx, (void**)&my_ptr);
+if (res < 0) {
+     return res;
+}
+// use my_ptr, now even if there is a grow, this pointer will be valid\&.
+
+.fi
+.PP
+.PP
+Currently, this dynamic array abstract data type can accommodate only 2^(\fC*\fP QB_ARRAY_MAX_INDEX_BITS) elements, and with standard zero-based indexing, this gives a valid index range [0, \fCQB_ARRAY_MAX_ELEMENTS\fP), where the notation denotes the beginning of the interval is included and the end is excluded\&. In other words, client space shall avoid a pitfall of relying solely on the type of  parameter to \fBqb_array_create\fP and/or of  parameter to \fBqb_array_index\fP (these types conflict, anyway)\&. 
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define QB_ARRAY_MAX_ELEMENTS   (1 << \fBQB_ARRAY_MAX_INDEX_BITS\fP)"
+
+.SS "#define QB_ARRAY_MAX_INDEX_BITS   16"
+
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef void(* qb_array_new_bin_cb_fn) (\fBqb_array_t\fP *a, uint32_t bin)"
+
+.SS "typedef struct qb_array \fBqb_array_t\fP"
+
+.PP
+This is an opaque data type representing an instance of an array\&. 
+.SH "Function Documentation"
+.PP 
+.SS "\fBqb_array_t\fP* qb_array_create (size_t max_elements, size_t element_size)"
+
+.PP
+Create an array with fixed sized elements\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImax_elements\fP initial max elements 
+.br
+\fIelement_size\fP size of each element 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+array instance 
+.RE
+.PP
+
+.SS "\fBqb_array_t\fP* qb_array_create_2 (size_t max_elements, size_t element_size, size_t autogrow_elements)"
+
+.PP
+Create an array with fixed sized elements\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImax_elements\fP initial max elements 
+.br
+\fIelement_size\fP size of each element 
+.br
+\fIautogrow_elements\fP the number of elements to grow automatically by\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+array instance 
+.RE
+.PP
+
+.SS "size_t qb_array_elems_per_bin_get (\fBqb_array_t\fP * a)"
+
+.PP
+Get the number of elements per bin\&. 
+.SS "void qb_array_free (\fBqb_array_t\fP * a)"
+
+.PP
+Free all the memory used by the array\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIa\fP array instance 
+.RE
+.PP
+
+.SS "int32_t qb_array_grow (\fBqb_array_t\fP * a, size_t max_elements)"
+
+.PP
+Grow the array\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIa\fP array instance 
+.br
+\fImax_elements\fP the new maximum size of the array 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+(0 == success, else -errno) 
+.RE
+.PP
+
+.SS "int32_t qb_array_index (\fBqb_array_t\fP * a, int32_t idx, void ** element_out)"
+
+.PP
+Get an element at a particular index\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIa\fP array instance 
+.br
+\fIidx\fP the index, valid in [0, \fCQB_ARRAY_MAX_ELEMENTS\fP) range 
+.br
+\fIelement_out\fP the pointer to the element data 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+(0 == success, else -errno) 
+.RE
+.PP
+
+.SS "int32_t qb_array_new_bin_cb_set (\fBqb_array_t\fP * a, \fBqb_array_new_bin_cb_fn\fP fn)"
+
+.PP
+Get a callback when a new bin is allocated\&. 
+.SS "size_t qb_array_num_bins_get (\fBqb_array_t\fP * a)"
+
+.PP
+Get the number of bins used by the array\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libqb from the source code\&.

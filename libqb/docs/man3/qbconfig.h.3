@@ -1,0 +1,64 @@
+.TH "qbconfig.h" 3 "Sun Dec 2 2018" "Version 1.0.3" "libqb" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+qbconfig.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qb/qbdefs\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBQB_ATOMIC_OP_MEMORY_BARRIER_NEEDED\fP   1"
+.br
+.ti -1c
+.RI "#define \fBQB_HAVE_ATTRIBUTE_SECTION\fP   1"
+.br
+.ti -1c
+.RI "#define \fBQB_VER_MAJOR\fP   1"
+.br
+.ti -1c
+.RI "#define \fBQB_VER_MINOR\fP   0"
+.br
+.ti -1c
+.RI "#define \fBQB_VER_MICRO\fP   3"
+.br
+.ti -1c
+.RI "#define \fBQB_VER_REST\fP   ''"
+.br
+.ti -1c
+.RI "#define \fBQB_VER_STR\fP"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define QB_ATOMIC_OP_MEMORY_BARRIER_NEEDED   1"
+
+.SS "#define QB_HAVE_ATTRIBUTE_SECTION   1"
+
+.SS "#define QB_VER_MAJOR   1"
+
+.SS "#define QB_VER_MICRO   3"
+
+.SS "#define QB_VER_MINOR   0"
+
+.SS "#define QB_VER_REST   ''"
+
+.SS "#define QB_VER_STR"
+\fBValue:\fP
+.PP
+.nf
+QB_PP_STRINGIFY(QB_VER_MAJOR) \
+        "\&." \
+        QB_PP_STRINGIFY(QB_VER_MINOR) \
+        "\&." \
+        QB_PP_STRINGIFY(QB_VER_MICRO) \
+        QB_VER_REST
+.fi
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libqb from the source code\&.

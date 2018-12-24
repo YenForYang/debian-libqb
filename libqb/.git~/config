@@ -1,0 +1,13 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://salsa.debian.org/ha-team/libqb.git
+	fetch = +refs/heads/debian/master:refs/remotes/origin/debian/master
+[branch "debian/master"]
+	remote = origin
+	merge = refs/heads/debian/master
+[user]
+	email = Richard Yang <richard@yenforyang.com>

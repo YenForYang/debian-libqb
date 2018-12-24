@@ -1,0 +1,45 @@
+Format: 1.8
+Date: Sun, 02 Dec 2018 19:27:41 +0100
+Source: libqb
+Binary: libqb-dev libqb-doc libqb0
+Built-For-Profiles: nobiarch nocheck nodoc
+Architecture: amd64 all
+Version: 1.0.3-2
+Distribution: unstable
+Urgency: medium
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Changed-By: Ferenc Wágner <wferi@debian.org>
+Description:
+ libqb-dev  - high performance client server features library (devel files)
+ libqb-doc  - high performance client server features library (API docs)
+ libqb0     - high performance client server features library
+Changes:
+ libqb (1.0.3-2) unstable; urgency=medium
+ .
+   * [0d1cda6] autopkgtest: test the installed library, headers and pkg-config
+     file.
+     This gets rid of build-needed and hopefully lets the test pass, even.
+   * [1686902] Multiarch support does not require Pre-Depends anymore
+   * [ae712b7] Update Standards-Version to 4.2.1 (no changes required)
+   * [f36c1fb] The debug symbol migration is complete
+Checksums-Sha1:
+ 81364134e80c71c1fbb2ef12aba93cb7e1530c2f 4432 libqb-dev-dbgsym_1.0.3-2_amd64.deb
+ f6fd8d28db46396e9cfb5f6bf99e4400a568371f 147672 libqb-dev_1.0.3-2_amd64.deb
+ 1ab31af9c2bd686cdd0be184dd37b03875691ef6 460580 libqb-doc_1.0.3-2_all.deb
+ 1a30f6b4d4259ed5b7ef9fa0d597d4e3edbf50f0 143844 libqb0-dbgsym_1.0.3-2_amd64.deb
+ ff99811cf9b5135e9646f8e7bef0403bc9483401 197764 libqb0_1.0.3-2_amd64.deb
+ d1e1431d46417e099173d82529a8d36c86dcebb1 8759 libqb_1.0.3-2_amd64.buildinfo
+Checksums-Sha256:
+ fe5400ea07255e8c8b3ba7d22fd4a5041cf1de781c3865a58a1cd50a5fd36106 4432 libqb-dev-dbgsym_1.0.3-2_amd64.deb
+ 13b10ae31ed0132cb9190a4f74bd1e1d571ce80f5d75264585d5477d9d3de7da 147672 libqb-dev_1.0.3-2_amd64.deb
+ 0f177b9e814b9b509bc47713760d0a41d65e53681e037399cdf2650ab7fb2a27 460580 libqb-doc_1.0.3-2_all.deb
+ 5e006b4cab5dec286a3db52d5105fe9a99a73059c529d55dc0129a8540c9a04d 143844 libqb0-dbgsym_1.0.3-2_amd64.deb
+ 060822aaf523f51b7ef46378e25d783cce12163dfc4265f95b6658356981c9b7 197764 libqb0_1.0.3-2_amd64.deb
+ cf929c1cf51908d9147681f16dd47b60e67a9d36c7dd617ef92279729ebc7fc3 8759 libqb_1.0.3-2_amd64.buildinfo
+Files:
+ 45ab7e736e25c2665d8fe4b22caeaf98 4432 debug optional libqb-dev-dbgsym_1.0.3-2_amd64.deb
+ 472a56f04ad90074a67b3d122f37aafb 147672 libdevel optional libqb-dev_1.0.3-2_amd64.deb
+ e8cf0883620f894b52ee04373b152fc2 460580 doc optional libqb-doc_1.0.3-2_all.deb
+ f06d9ec7700223dae9ef3ee97030b95b 143844 debug optional libqb0-dbgsym_1.0.3-2_amd64.deb
+ b3a41d9e894f995c2ac8d9f709d3893a 197764 libs optional libqb0_1.0.3-2_amd64.deb
+ 24f76229f235607d30237dfb9d03d3bf 8759 libs optional libqb_1.0.3-2_amd64.buildinfo
